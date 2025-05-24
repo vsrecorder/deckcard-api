@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from selenium import webdriver 
 from bs4 import BeautifulSoup
 
@@ -13,6 +13,16 @@ options.add_argument("--disable-dev-shm-usage")
 
 driver = webdriver.Chrome(service=service, options=options)
 driver.set_window_size(950, 800)
+
+
+def find_acespec(deck_code):
+    list = create_deckcard_list(deck_code)
+
+    for card in list:
+        if "ACE SPEC" in card["name"]:
+            return card
+
+    raise HTTPException(status_code=404)
 
 
 def create_deckcard_list(deck_code):
@@ -44,8 +54,13 @@ def create_deckcard_list(deck_code):
     return card_list
 
 
+
 app = FastAPI()
 
 @app.get("/deckcards/{deck_code}")
 async def read_item(deck_code):
     return create_deckcard_list(deck_code)
+
+@app.get("/deckcards/{deck_code}/acespec")
+async def read_item(deck_code):
+    return find_acespec(deck_code)

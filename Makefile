@@ -1,10 +1,6 @@
 .PHONY: docker-build
-docker-build:
-	sudo docker build --no-cache -t vsrecorder/deckcard-api:latest .
-
-.PHONY: docker-push
-docker-push:
-	sudo docker push vsrecorder/deckcard-api:latest
+docker-build-and-push:
+	sudo docker build --no-cache -t vsrecorder/deckcard-api:latest . && sudo docker push vsrecorder/deckcard-api:latest
 
 .PHONY: deploy
 deploy:
