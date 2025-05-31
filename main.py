@@ -15,11 +15,44 @@ driver = webdriver.Chrome(service=service, options=options)
 driver.set_window_size(950, 800)
 
 
+acespecs = [
+    "ポケモン回収サイクロン",
+    "スクランブルスイッチ",
+    "マスターボール",
+    "ヒーローマント",
+    "リブートポッド",
+    "プライムキャッチャー",
+    "ネオアッパーエネルギー",
+    "マキシマムベルト",
+    "覚醒のドラム",
+    "サバイブギプス",
+    "ハイパーアロマ",
+    "アンフェアスタンプ",
+    "レガシーエネルギー",
+    "シークレットボックス",
+    "ニュートラルセンター",
+    "ポケバイタルA",
+    "デンジャラス光線",
+    "偉大な大樹",
+    "デラックスボム",
+    "きらめく結晶",
+    "パーフェクトミキサー",
+    "プレシャスキャリー",
+    "リッチエネルギー",
+    "メガトンブロアー",
+    "エネルギー転送PRO",
+    "希望のアミュレット",
+    "ミラクルインカム",
+    "トレジャーガジェット",
+    "つりざおMAX",
+]
+
 def find_acespec(deck_code):
     list = create_deckcard_list(deck_code)
 
+
     for card in list:
-        if "ACE SPEC" in card["name"]:
+        if card["name"] in acespecs:
             return card
 
     raise HTTPException(status_code=404)
@@ -28,11 +61,12 @@ def find_acespec(deck_code):
 def create_deckcard_list(deck_code):
     driver.get(url + deck_code)
 
-    page_source_html = driver.page_source
-    bs = BeautifulSoup(page_source_html, "html.parser")
-
-    card_image_view_html = str(bs.find_all(id='cardImagesView')[0])
-    bs = BeautifulSoup(card_image_view_html, "html.parser")
+    bs = BeautifulSoup(driver.page_source, "html.parser")
+    
+    if len(bs.find_all(id='cardImagesView')) == 1:
+        bs = BeautifulSoup(str(bs.find_all(id='cardImagesView')[0]), "html.parser")
+    else:
+        bs = BeautifulSoup(str(bs.find_all(id='cardImagesView')), "html.parser")
 
     card_list = []
     for item in bs.find_all(class_="Grid_item"):
