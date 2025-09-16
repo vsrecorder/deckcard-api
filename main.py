@@ -1,5 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from selenium import webdriver 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from bs4 import BeautifulSoup
 
 url = "https://www.pokemon-card.com/deck/result.html/deckID/"
@@ -10,6 +14,12 @@ options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
+
+# プロセス数削減のための追加フラグ
+options.add_argument("--single-process")
+options.add_argument("--disable-site-isolation-trials")
+options.add_argument("--disable-gpu")
+options.add_argument("--no-zygote")
 
 driver = webdriver.Chrome(service=service, options=options)
 driver.set_window_size(950, 800)
@@ -47,22 +57,30 @@ acespecs = [
     "つりざおMAX",
 ]
 
+
 def find_acespec(deck_code):
     list = create_deckcard_list(deck_code)
-
 
     for card in list:
         if card["name"] in acespecs:
             return card
 
-    raise HTTPException(status_code=404)
+    raise HTTPException(status_code=204)
 
 
 def create_deckcard_list(deck_code):
     driver.get(url + deck_code)
 
+    # ページ読み込み待機：https://selenium-python.readthedocs.io/waits.html
+    try:
+        WebDriverWait(driver, 3).until(
+            EC.presence_of_element_located((By.ID, "cardImagesView"))
+        )
+    except TimeoutException:
+        raise HTTPException(status_code=500)
+
     bs = BeautifulSoup(driver.page_source, "html.parser")
-    
+
     if len(bs.find_all(id='cardImagesView')) == 1:
         bs = BeautifulSoup(str(bs.find_all(id='cardImagesView')[0]), "html.parser")
     else:
@@ -72,7 +90,7 @@ def create_deckcard_list(deck_code):
     for item in bs.find_all(class_="Grid_item"):
         bs = BeautifulSoup(str(item), "html.parser")
         bs = BeautifulSoup(str(bs.table), "html.parser")
-        counter = 0
+
         it = iter(bs.find_all("tr"))
         for tr_tag_1, tr_tag_2 in zip(it, it):
             bs = BeautifulSoup(str(tr_tag_1), "html.parser")
@@ -85,7 +103,10 @@ def create_deckcard_list(deck_code):
             }
             card_list.append(card_info)
 
-    return card_list
+    if card_list == []:
+        raise HTTPException(status_code=204)
+    else:
+        return card_list
 
 
 
