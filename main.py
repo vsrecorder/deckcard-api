@@ -1,9 +1,12 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
+
 from selenium import webdriver 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+
 from bs4 import BeautifulSoup
 
 url = "https://www.pokemon-card.com/deck/result.html/deckID/"
@@ -26,35 +29,35 @@ driver.set_window_size(950, 800)
 
 
 acespecs = [
-    "ポケモン回収サイクロン",
-    "スクランブルスイッチ",
-    "マスターボール",
-    "ヒーローマント",
-    "リブートポッド",
-    "プライムキャッチャー",
-    "ネオアッパーエネルギー",
-    "マキシマムベルト",
-    "覚醒のドラム",
-    "サバイブギプス",
-    "ハイパーアロマ",
-    "アンフェアスタンプ",
-    "レガシーエネルギー",
-    "シークレットボックス",
-    "ニュートラルセンター",
-    "ポケバイタルA",
-    "デンジャラス光線",
-    "偉大な大樹",
-    "デラックスボム",
-    "きらめく結晶",
-    "パーフェクトミキサー",
-    "プレシャスキャリー",
-    "リッチエネルギー",
-    "メガトンブロアー",
-    "エネルギー転送PRO",
-    "希望のアミュレット",
-    "ミラクルインカム",
-    "トレジャーガジェット",
-    "つりざおMAX",
+    "ポケモン回収サイクロン(ACE SPEC)",
+    "スクランブルスイッチ(ACE SPEC)",
+    "マスターボール(ACE SPEC)",
+    "ヒーローマント(ACE SPEC)",
+    "リブートポッド(ACE SPEC)",
+    "プライムキャッチャー(ACE SPEC)",
+    "ネオアッパーエネルギー(ACE SPEC)",
+    "マキシマムベルト(ACE SPEC)",
+    "覚醒のドラム(ACE SPEC)",
+    "サバイブギプス(ACE SPEC)",
+    "ハイパーアロマ(ACE SPEC)",
+    "アンフェアスタンプ(ACE SPEC)",
+    "レガシーエネルギー(ACE SPEC)",
+    "シークレットボックス(ACE SPEC)",
+    "ニュートラルセンター(ACE SPEC)",
+    "ポケバイタルA(ACE SPEC)",
+    "デンジャラス光線(ACE SPEC)",
+    "偉大な大樹(ACE SPEC)",
+    "デラックスボム(ACE SPEC)",
+    "きらめく結晶(ACE SPEC)",
+    "パーフェクトミキサー(ACE SPEC)",
+    "プレシャスキャリー(ACE SPEC)",
+    "リッチエネルギー(ACE SPEC)",
+    "メガトンブロアー(ACE SPEC)",
+    "エネルギー転送PRO(ACE SPEC)",
+    "希望のアミュレット(ACE SPEC)",
+    "ミラクルインカム(ACE SPEC)",
+    "トレジャーガジェット(ACE SPEC)",
+    "つりざおMAX(ACE SPEC)",
 ]
 
 
@@ -65,7 +68,7 @@ def find_acespec(deck_code):
         if card["name"] in acespecs:
             return card
 
-    raise HTTPException(status_code=204)
+    return JSONResponse(content={}, status_code=200)
 
 
 def create_deckcard_list(deck_code):
@@ -103,10 +106,7 @@ def create_deckcard_list(deck_code):
             }
             card_list.append(card_info)
 
-    if card_list == []:
-        raise HTTPException(status_code=204)
-    else:
-        return card_list
+    return card_list
 
 
 
