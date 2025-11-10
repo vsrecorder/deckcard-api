@@ -84,7 +84,7 @@ def create_deckcards(deck_code):
     if len(bs.find_all('script', attrs={"type": "", "src": ""})) != 2:
         count = len(bs.find_all('script', attrs={"type": "", "src": ""}))
         logger.exception(f"Unexpected <script> tag count: expected = 2, actual = {count}")
-        return JSONResponse(content={}, status_code=504)
+        return JSONResponse(content={}, status_code=500)
 
     """
     <script>
@@ -198,7 +198,7 @@ def create_deckcards(deck_code):
     if len(bs.find_all(id='inputArea')) != 1:
         count =len(bs.find_all(id='inputArea')) 
         logger.exception(f"Unexpected 'inputArea' id count: expected = 1, actual = {count}")
-        return JSONResponse(content={}, status_code=504)
+        return JSONResponse(content={}, status_code=500)
 
     """
     <form id="inputArea" action="./deckRegister.php">
@@ -224,6 +224,8 @@ def create_deckcards(deck_code):
             }
             card_count_dict.update(result)
 
+    total_card_count = 0
+
     for number, name in card_name_dict.items():
         card_info = {
             "name": str(name),
@@ -232,6 +234,11 @@ def create_deckcards(deck_code):
             "count": card_count_dict[number],
         }
         deckcards.append(card_info)
+        total_card_count += card_count_dict[number]
+
+    if total_card_count != 60:
+        logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
+        return JSONResponse(content={}, status_code=500)
 
     return deckcards
 
@@ -271,7 +278,7 @@ def create_deckcards_list(deck_code):
     if len(bs.find_all('script', attrs={"type": "", "src": ""})) != 2:
         count = len(bs.find_all('script', attrs={"type": "", "src": ""}))
         logger.exception(f"Unexpected <script> tag count: expected = 2, actual = {count}")
-        return JSONResponse(content={}, status_code=504)
+        return JSONResponse(content={}, status_code=500)
 
     """
     <script>
@@ -385,7 +392,7 @@ def create_deckcards_list(deck_code):
     if len(bs.find_all(id='inputArea')) != 1:
         count =len(bs.find_all(id='inputArea')) 
         logger.exception(f"Unexpected 'inputArea' id count: expected = 1, actual = {count}")
-        return JSONResponse(content={}, status_code=504)
+        return JSONResponse(content={}, status_code=500)
 
     """
     <form id="inputArea" action="./deckRegister.php">
@@ -404,6 +411,7 @@ def create_deckcards_list(deck_code):
     bs_input_area = BeautifulSoup(str(bs.find_all(id='inputArea')[0]), "html.parser")
 
     list = {}
+    total_card_count = 0
 
     for item in bs_input_area.find_all('input'):
         if item['id'] == "deck_ajs" or item['id'] == "copyDeckID":
@@ -431,6 +439,11 @@ def create_deckcards_list(deck_code):
             card_type_count += count
 
         list.update({item['id']: deckcards, item['id']+"_count": card_type_count})
+        total_card_count += card_type_count
+
+    if total_card_count != 60:
+        logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
+        return JSONResponse(content={}, status_code=500)
 
     return list
 
