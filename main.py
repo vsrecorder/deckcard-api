@@ -16,34 +16,63 @@ logging.basicConfig(
 url = "https://www.pokemon-card.com/deck/result.html/deckID/"
 
 acespecs = [
+    "ポケモン回収サイクロン",
     "ポケモン回収サイクロン(ACE SPEC)",
+    "スクランブルスイッチ",
     "スクランブルスイッチ(ACE SPEC)",
+    "マスターボール",
     "マスターボール(ACE SPEC)",
+    "ヒーローマント",
     "ヒーローマント(ACE SPEC)",
+    "リブートポッド",
     "リブートポッド(ACE SPEC)",
+    "プライムキャッチャー",
     "プライムキャッチャー(ACE SPEC)",
+    "ネオアッパーエネルギー",
     "ネオアッパーエネルギー(ACE SPEC)",
+    "マキシマムベルト",
     "マキシマムベルト(ACE SPEC)",
+    "覚醒のドラム",
     "覚醒のドラム(ACE SPEC)",
+    "サバイブギプス",
     "サバイブギプス(ACE SPEC)",
+    "ハイパーアロマ",
     "ハイパーアロマ(ACE SPEC)",
+    "アンフェアスタンプ",
     "アンフェアスタンプ(ACE SPEC)",
+    "レガシーエネルギー",
     "レガシーエネルギー(ACE SPEC)",
+    "シークレットボックス",
     "シークレットボックス(ACE SPEC)",
+    "ニュートラルセンター",
     "ニュートラルセンター(ACE SPEC)",
+    "ポケバイタルA",
     "ポケバイタルA(ACE SPEC)",
+    "デンジャラス光線",
     "デンジャラス光線(ACE SPEC)",
+    "偉大な大樹",
     "偉大な大樹(ACE SPEC)",
+    "デラックスボム",
     "デラックスボム(ACE SPEC)",
+    "きらめく結晶",
     "きらめく結晶(ACE SPEC)",
+    "パーフェクトミキサー",
     "パーフェクトミキサー(ACE SPEC)",
+    "プレシャスキャリー",
     "プレシャスキャリー(ACE SPEC)",
+    "リッチエネルギー",
     "リッチエネルギー(ACE SPEC)",
+    "メガトンブロアー",
     "メガトンブロアー(ACE SPEC)",
+    "エネルギー転送PRO",
     "エネルギー転送PRO(ACE SPEC)",
+    "希望のアミュレット",
     "希望のアミュレット(ACE SPEC)",
+    "ミラクルインカム",
     "ミラクルインカム(ACE SPEC)",
+    "トレジャーガジェット",
     "トレジャーガジェット(ACE SPEC)",
+    "つりざおMAX",
     "つりざおMAX(ACE SPEC)",
 ]
 
@@ -453,6 +482,7 @@ def find_acespec(deck_code):
 
     for card in deckcards:
         if card["name"] in acespecs:
+            card["name"] = card["name"].replace("(ACE SPEC)", "")
             return card
 
     return JSONResponse(content={}, status_code=204)
