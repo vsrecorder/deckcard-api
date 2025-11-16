@@ -257,7 +257,7 @@ def create_deckcards(deck_code):
 
     for number, name in card_name_dict.items():
         card_info = {
-            "name": str(name),
+            "name": str(name).replace("(ACE SPEC)", ""),
             "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(number)),
             "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[number])),
             "count": card_count_dict[number],
@@ -459,7 +459,7 @@ def create_deckcards_list(deck_code):
 
         for number, count in card_count_dict.items():
             card_info = {
-                "name": str(card_name_dict[number]),
+                "name": str(card_name_dict[number]).replace("(ACE SPEC)", ""),
                 "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(number)),
                 "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[number])),
                 "count": count,
