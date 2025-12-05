@@ -272,7 +272,7 @@ def create_deckcards(deck_code):
     return deckcards
 
 
-def create_deckcards_list(deck_code):
+def create_deckcards_detail(deck_code):
     try:
         logger.info(f"Request start: {url + deck_code}")
 
@@ -494,9 +494,9 @@ app = FastAPI()
 def create_deckcards_app(deck_code):
     return create_deckcards(deck_code)
 
-@app.get("/deckcards/{deck_code}/list")
-def create_deckcards_list_app(deck_code):
-    return create_deckcards_list(deck_code)
+@app.get("/deckcards/{deck_code}/detail")
+def create_deckcards_detail_app(deck_code):
+    return create_deckcards_detail(deck_code)
 
 @app.get("/deckcards/{deck_code}/acespec")
 def find_acespec_app(deck_code):
