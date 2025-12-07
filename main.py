@@ -483,7 +483,6 @@ def find_acespec(deck_code):
     for card in deckcards:
         if card["name"] in acespecs:
             card["name"] = card["name"].replace("(ACE SPEC)", "")
-            card.pop("count")
             return card
 
     return JSONResponse(content={}, status_code=204)
