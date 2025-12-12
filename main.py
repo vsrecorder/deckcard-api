@@ -1,6 +1,11 @@
+import os
+
 import re
 import requests
 import logging
+
+import psycopg2
+from dotenv import load_dotenv
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
@@ -255,15 +260,15 @@ def create_deckcards(deck_code):
 
     total_card_count = 0
 
-    for number, name in card_name_dict.items():
+    for card_id, name in card_name_dict.items():
         card_info = {
             "name": str(name).replace("(ACE SPEC)", ""),
-            "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(number)),
-            "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[number])),
-            "count": card_count_dict[number],
+            "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
+            "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+            "count": card_count_dict[card_id],
         }
         deckcards.append(card_info)
-        total_card_count += card_count_dict[number]
+        total_card_count += card_count_dict[card_id]
 
     if total_card_count != 60:
         logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
@@ -272,7 +277,7 @@ def create_deckcards(deck_code):
     return deckcards
 
 
-def create_deckcards_detail(deck_code):
+def create_deckcards_detail(conn, deck_code):
     try:
         logger.info(f"Request start: {url + deck_code}")
 
@@ -457,15 +462,45 @@ def create_deckcards_detail(deck_code):
             }
             card_count_dict.update(result)
 
-        for number, count in card_count_dict.items():
-            card_info = {
-                "name": str(card_name_dict[number]).replace("(ACE SPEC)", ""),
-                "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(number)),
-                "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[number])),
-                "count": count,
-            }
-            deckcards.append(card_info)
-            card_type_count += count
+        for card_id, count in card_count_dict.items():
+            if item['id'] == "deck_pke":
+                with conn.cursor() as cur:
+                    ability = ""
+                    attacks = []
+                    sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s" 
+                    cur.execute(sql, (card_id,))
+                    row = cur.fetchone()
+
+                    if row is None:
+                        logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                        return JSONResponse(content={}, status_code=500)
+                    else:
+                        ability = row[0]
+                        attacks = row[1].split('/')
+
+                    cur.close()
+
+                card_info = {
+                    "name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                    "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
+                    "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                    "count": count,
+                    "ability": ability,
+                    "attacks": attacks,
+                }
+
+                deckcards.append(card_info)
+                card_type_count += count
+            else:
+                card_info = {
+                    "name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                    "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
+                    "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                    "count": count,
+                }
+
+                deckcards.append(card_info)
+                card_type_count += count
 
         list.update({item['id']: deckcards, item['id']+"_count": card_type_count})
         total_card_count += card_type_count
@@ -488,6 +523,18 @@ def find_acespec(deck_code):
     return JSONResponse(content={}, status_code=204)
 
 
+
+load_dotenv()
+
+host = os.getenv("DB_HOSTNAME")
+port = os.getenv("DB_PORT")
+user = os.getenv("DB_USER_NAME")
+password = os.getenv("DB_USER_PASSWORD")
+dbname = os.getenv("DB_NAME")
+dsn = "host={} port={} user={} password={} dbname={} sslmode=disable".format(host, port, user, password, dbname)
+
+conn = psycopg2.connect(dsn)
+
 app = FastAPI()
 
 @app.get("/deckcards/{deck_code}")
@@ -496,7 +543,7 @@ def create_deckcards_app(deck_code):
 
 @app.get("/deckcards/{deck_code}/detail")
 def create_deckcards_detail_app(deck_code):
-    return create_deckcards_detail(deck_code)
+    return create_deckcards_detail(conn, deck_code)
 
 @app.get("/deckcards/{deck_code}/acespec")
 def find_acespec_app(deck_code):
