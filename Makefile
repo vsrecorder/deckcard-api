@@ -1,6 +1,6 @@
 .PHONY: docker-build-and-push
 docker-build-and-push:
-	sudo docker build -t vsrecorder/deckcard-api:latest . && sudo docker push vsrecorder/deckcard-api:latest
+	docker build -t vsrecorder/deckcard-api:latest . && docker push vsrecorder/deckcard-api:latest
 
 .PHONY: deploy
 deploy:
@@ -13,3 +13,4 @@ source:
 .PHONY: run
 run:
 	uvicorn main:app --host 0.0.0.0 --port 8080
+
