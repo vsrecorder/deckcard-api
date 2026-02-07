@@ -1559,6 +1559,7 @@ def create_deckcards_detail_app(deck_code):
     return create_deckcards_detail(conn, deck_code)
 
 
+
 @app.get("/api/v1beta/deckcards/{deck_code}")
 def create_v1beta_deckcards_app(deck_code):
     return create_v1beta_deckcards(conn, deck_code)
@@ -1578,6 +1579,8 @@ def create_v1beta_deckcards_list_app(deck_code):
 @app.get("/api/v1beta/deckcards/{deck_code}/summary")
 def create_v1beta_deckcards_summary_app(deck_code):
     return create_v1beta_deckcards_summary(conn, deck_code)
+
+
 
 @app.get("/health")
 def health():

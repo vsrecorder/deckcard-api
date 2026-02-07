@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 .PHONY: docker-build-and-push
 docker-build-and-push:
 	docker build -t vsrecorder/deckcard-api:latest . && docker push vsrecorder/deckcard-api:latest
@@ -5,6 +7,10 @@ docker-build-and-push:
 .PHONY: deploy
 deploy:
 	docker compose pull && docker compose down && docker compose up -d
+
+.PHONY: restart
+restart:
+	docker compose down && docker compose up -d
 
 .PHONY: source
 source:
