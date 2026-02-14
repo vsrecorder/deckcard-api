@@ -5,7 +5,7 @@ import requests
 import logging
 from collections import OrderedDict
 
-import psycopg2
+import psycopg
 from dotenv import load_dotenv
 
 from fastapi import FastAPI, HTTPException
@@ -1541,7 +1541,7 @@ password = os.getenv("DB_USER_PASSWORD")
 dbname = os.getenv("DB_NAME")
 dsn = "host={} port={} user={} password={} dbname={} sslmode=disable".format(host, port, user, password, dbname)
 
-conn = psycopg2.connect(dsn)
+conn = psycopg.connect(dsn)
 
 app = FastAPI()
 
