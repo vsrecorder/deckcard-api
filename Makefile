@@ -12,6 +12,14 @@ deploy:
 restart:
 	docker compose down && docker compose up -d
 
+.PHONY: up
+up:
+	docker compose pull && docker compose down && docker compose up -d
+
+.PHONY: down
+down:
+	docker compose down
+
 .PHONY: source
 source:
 	fish -C "source .venv/bin/activate.fish"
