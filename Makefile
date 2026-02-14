@@ -1,9 +1,5 @@
 SHELL := /bin/bash
 
-.PHONY: docker-build-and-push
-docker-build-and-push:
-	docker build -t vsrecorder/deckcard-api:latest . && docker push vsrecorder/deckcard-api:latest
-
 .PHONY: source
 source:
 	fish -C "source .venv/bin/activate.fish"
@@ -12,6 +8,11 @@ source:
 run:
 	fish -C "source .venv/bin/activate.fish; uvicorn main:app --host 0.0.0.0 --port 8080"
 
+
+
+.PHONY: docker-build-and-push
+docker-build-and-push:
+	docker build -t vsrecorder/deckcard-api:latest . && docker push vsrecorder/deckcard-api:latest
 
 .PHONY: deploy
 deploy:
