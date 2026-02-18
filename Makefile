@@ -10,8 +10,8 @@ run:
 
 
 
-.PHONY: docker-build-and-push
-docker-build-and-push:
+.PHONY: image
+image:
 	docker build -t vsrecorder/deckcard-api:latest . && docker push vsrecorder/deckcard-api:latest
 
 .PHONY: deploy
@@ -29,3 +29,7 @@ up:
 .PHONY: down
 down:
 	docker compose down
+
+.PHONY: log
+log:
+	docker logs -f deckcard-api-deckcard-api-1

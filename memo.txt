@@ -1,0 +1,523 @@
+INFO:     127.0.0.1:37882 - "GET /api/v1beta/deckcards/bkffvF-5a3VVt-Fkb5kk/acespec HTTP/1.0" 200 OK
+2026-02-15 16:02:21,839 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/n9ngLg-Awc4hP-PLnNgN (status=200)
+INFO:     127.0.0.1:37928 - "GET /api/v1beta/deckcards/n9ngLg-Awc4hP-PLnNgN/acespec HTTP/1.0" 200 OK
+2026-02-15 16:02:21,878 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/J88Jc4-Jvmo3R-8Yx888 (status=200)
+INFO:     127.0.0.1:38040 - "GET /api/v1beta/deckcards/J88Jc4-Jvmo3R-8Yx888/acespec HTTP/1.0" 200 OK
+2026-02-15 16:02:21,994 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/J88Jc4-Jvmo3R-8Yx888 (status=200)
+INFO:     127.0.0.1:38028 - "GET /api/v1beta/deckcards/J88Jc4-Jvmo3R-8Yx888/acespec HTTP/1.0" 200 OK
+2026-02-15 16:02:22,082 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/n9ngLg-Awc4hP-PLnNgN (status=200)
+INFO:     127.0.0.1:37980 - "GET /api/v1beta/deckcards/n9ngLg-Awc4hP-PLnNgN/acespec HTTP/1.0" 200 OK
+2026-02-15 16:02:22,194 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/4G8ca8-OGG80h-ca48xD (status=200)
+INFO:     127.0.0.1:37868 - "GET /api/v1beta/deckcards/4G8ca8-OGG80h-ca48xD/acespec HTTP/1.0" 200 OK
+2026-02-15 16:09:26,192 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+2026-02-15 16:09:26,411 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK (status=200)
+INFO:     127.0.0.1:55722 - "GET /api/v1beta/deckcards/G8xY44-AKFYv9-Dcx8cK/summary HTTP/1.0" 200 OK
+2026-02-15 16:10:09,531 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk
+2026-02-15 16:10:09,740 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk (status=200)
+INFO:     127.0.0.1:54724 - "GET /api/v1beta/deckcards/df5kkb-nL5iDE-VkFkfk/summary HTTP/1.0" 200 OK
+2026-02-15 16:16:23,992 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk
+2026-02-15 16:16:24,385 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk (status=200)
+INFO:     127.0.0.1:59510 - "GET /api/v1beta/deckcards/df5kkb-nL5iDE-VkFkfk/summary HTTP/1.0" 200 OK
+2026-02-15 16:40:21,089 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk
+2026-02-15 16:40:21,314 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk (status=200)
+INFO:     127.0.0.1:57286 - "GET /api/v1beta/deckcards/df5kkb-nL5iDE-VkFkfk/summary HTTP/1.0" 200 OK
+2026-02-15 16:45:02,493 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk
+2026-02-15 16:45:02,871 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk (status=200)
+INFO:     127.0.0.1:47212 - "GET /api/v1beta/deckcards/df5kkb-nL5iDE-VkFkfk/summary HTTP/1.0" 200 OK
+2026-02-15 16:53:53,764 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/vFVkkV-SxPdol-f5bVvV
+2026-02-15 16:53:59,219 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/vFVkkV-SxPdol-f5bVvV (status=200)
+INFO:     127.0.0.1:33356 - "GET /api/v1beta/deckcards/vFVkkV-SxPdol-f5bVvV/summary HTTP/1.0" 200 OK
+2026-02-15 17:22:58,285 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 17:22:58,287 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH
+2026-02-15 17:22:58,296 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+2026-02-15 17:22:58,766 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5 (status=200)
+INFO:     127.0.0.1:38494 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 200 OK
+2026-02-15 17:22:58,789 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH (status=200)
+INFO:     127.0.0.1:38510 - "GET /api/v1beta/deckcards/9NngnQ-7lKMrx-gnnngH/list HTTP/1.0" 200 OK
+2026-02-15 17:22:59,300 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 17:22:59,725 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5 (status=200)
+INFO:     127.0.0.1:40584 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 200 OK
+2026-02-15 17:23:01,452 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+INFO:     127.0.0.1:38524 - "GET /api/v1beta/deckcards/G8xY44-AKFYv9-Dcx8cK/list HTTP/1.0" 504 Gateway Timeout
+2026-02-15 17:25:33,773 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 17:25:33,774 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 17:25:33,775 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH
+2026-02-15 17:25:33,780 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+2026-02-15 17:25:34,213 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK (status=200)
+INFO:     127.0.0.1:41402 - "GET /api/v1beta/deckcards/G8xY44-AKFYv9-Dcx8cK/list HTTP/1.0" 200 OK
+2026-02-15 17:25:34,236 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH (status=200)
+2026-02-15 17:25:34,249 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5 (status=200)
+INFO:     127.0.0.1:41390 - "GET /api/v1beta/deckcards/9NngnQ-7lKMrx-gnnngH/list HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41362 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 200 OK
+2026-02-15 17:25:34,270 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5 (status=200)
+INFO:     127.0.0.1:41376 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 200 OK
+2026-02-15 17:25:50,977 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk
+2026-02-15 17:25:51,280 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk (status=200)
+INFO:     127.0.0.1:32880 - "GET /api/v1beta/deckcards/df5kkb-nL5iDE-VkFkfk/summary HTTP/1.0" 200 OK
+2026-02-15 17:28:42,452 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk
+2026-02-15 17:28:42,760 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/df5kkb-nL5iDE-VkFkfk (status=200)
+INFO:     127.0.0.1:53462 - "GET /api/v1beta/deckcards/df5kkb-nL5iDE-VkFkfk/summary HTTP/1.0" 200 OK
+2026-02-15 19:54:48,237 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 19:54:48,241 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 19:54:48,259 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH
+2026-02-15 19:54:48,264 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+2026-02-15 19:54:48,538 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5 (status=200)
+INFO:     127.0.0.1:33302 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 200 OK
+2026-02-15 19:54:48,558 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH (status=200)
+2026-02-15 19:54:48,572 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK (status=200)
+2026-02-15 19:54:48,582 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5 (status=200)
+INFO:     127.0.0.1:33318 - "GET /api/v1beta/deckcards/9NngnQ-7lKMrx-gnnngH/list HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33332 - "GET /api/v1beta/deckcards/G8xY44-AKFYv9-Dcx8cK/list HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33296 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 200 OK
+2026-02-15 20:01:57,995 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 20:01:57,997 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 20:01:57,998 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH
+2026-02-15 20:01:57,999 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+2026-02-15 20:01:58,431 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5 (status=200)
+INFO:     127.0.0.1:54272 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 200 OK
+2026-02-15 20:02:01,146 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+INFO:     127.0.0.1:54294 - "GET /api/v1beta/deckcards/G8xY44-AKFYv9-Dcx8cK/list HTTP/1.0" 504 Gateway Timeout
+2026-02-15 20:02:01,151 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH
+INFO:     127.0.0.1:54288 - "GET /api/v1beta/deckcards/9NngnQ-7lKMrx-gnnngH/list HTTP/1.0" 504 Gateway Timeout
+2026-02-15 20:02:01,155 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+INFO:     127.0.0.1:54284 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 504 Gateway Timeout
+2026-02-15 20:07:44,077 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 20:07:44,079 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 20:07:44,079 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH
+2026-02-15 20:07:44,083 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+2026-02-15 20:07:44,340 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5 (status=200)
+INFO:     127.0.0.1:46266 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 200 OK
+2026-02-15 20:07:47,131 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH
+2026-02-15 20:07:47,132 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+INFO:     127.0.0.1:46282 - "GET /api/v1beta/deckcards/9NngnQ-7lKMrx-gnnngH/list HTTP/1.0" 504 Gateway Timeout
+INFO:     127.0.0.1:46286 - "GET /api/v1beta/deckcards/G8xY44-AKFYv9-Dcx8cK/list HTTP/1.0" 504 Gateway Timeout
+2026-02-15 20:07:47,134 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+INFO:     127.0.0.1:46254 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 504 Gateway Timeout
+2026-02-15 20:08:14,400 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+2026-02-15 20:08:14,406 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 20:08:14,407 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 20:08:14,455 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH
+2026-02-15 20:08:14,919 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5 (status=200)
+INFO:     127.0.0.1:35222 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 200 OK
+2026-02-15 20:08:17,479 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+INFO:     127.0.0.1:35212 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 504 Gateway Timeout
+2026-02-15 20:08:17,480 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+INFO:     127.0.0.1:35204 - "GET /api/v1beta/deckcards/G8xY44-AKFYv9-Dcx8cK/list HTTP/1.0" 504 Gateway Timeout
+2026-02-15 20:08:17,507 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH
+INFO:     127.0.0.1:35226 - "GET /api/v1beta/deckcards/9NngnQ-7lKMrx-gnnngH/list HTTP/1.0" 504 Gateway Timeout
+2026-02-15 20:09:42,056 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH
+2026-02-15 20:09:42,058 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 20:09:42,063 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+2026-02-15 20:09:42,068 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+2026-02-15 20:09:44,608 [ERROR] main: HTTPError: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5 -> status 503
+INFO:     127.0.0.1:42010 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 503 Service Unavailable
+2026-02-15 20:09:44,612 [ERROR] main: HTTPError: https://www.pokemon-card.com/deck/result.html/deckID/9NngnQ-7lKMrx-gnnngH -> status 503
+INFO:     127.0.0.1:41984 - "GET /api/v1beta/deckcards/9NngnQ-7lKMrx-gnnngH/list HTTP/1.0" 503 Service Unavailable
+2026-02-15 20:09:46,125 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/G8xY44-AKFYv9-Dcx8cK
+INFO:     127.0.0.1:42002 - "GET /api/v1beta/deckcards/G8xY44-AKFYv9-Dcx8cK/list HTTP/1.0" 504 Gateway Timeout
+2026-02-15 20:09:46,146 [WARNING] main: Timeout occurred: https://www.pokemon-card.com/deck/result.html/deckID/FfVfbk-ZfALmf-F1kVF5
+INFO:     127.0.0.1:41986 - "GET /api/v1beta/deckcards/FfVfbk-ZfALmf-F1kVF5/list HTTP/1.0" 504 Gateway Timeout
+
+
+ubuntu@vsrecorder:~$ docker logs -f deckcard-api-deckcard-api-1
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-02-15 23:44:45,895 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-15 23:44:46,234 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+INFO:     127.0.0.1:50096 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/summary HTTP/1.0" 200 OK
+2026-02-16 00:11:35,916 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3
+2026-02-16 00:11:36,161 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3 (status=200)
+INFO:     127.0.0.1:59684 - "GET /api/v1beta/deckcards/UyMSUM-O6E3fh-pyRMp3/summary HTTP/1.0" 200 OK
+2026-02-16 00:11:40,835 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3
+2026-02-16 00:11:41,104 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3 (status=200)
+INFO:     127.0.0.1:59694 - "GET /api/v1beta/deckcards/UyMSUM-O6E3fh-pyRMp3/list HTTP/1.0" 200 OK
+2026-02-16 00:20:13,717 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8cxccK-7hZmgw-JDG8xx
+2026-02-16 00:20:13,903 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8cxccK-7hZmgw-JDG8xx (status=200)
+INFO:     127.0.0.1:52062 - "GET /api/v1beta/deckcards/8cxccK-7hZmgw-JDG8xx/summary HTTP/1.0" 200 OK
+2026-02-16 00:20:25,327 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8cxccK-7hZmgw-JDG8xx
+2026-02-16 00:20:25,565 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8cxccK-7hZmgw-JDG8xx (status=200)
+INFO:     127.0.0.1:45130 - "GET /api/v1beta/deckcards/8cxccK-7hZmgw-JDG8xx/list HTTP/1.0" 200 OK
+2026-02-16 00:35:13,991 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-16 00:35:14,214 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+INFO:     127.0.0.1:52244 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/summary HTTP/1.0" 200 OK
+2026-02-16 00:47:15,694 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3
+2026-02-16 00:47:15,785 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3 (status=200)
+INFO:     127.0.0.1:48138 - "GET /api/v1beta/deckcards/UyMSUM-O6E3fh-pyRMp3/summary HTTP/1.0" 200 OK
+2026-02-16 00:47:27,286 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3
+2026-02-16 00:47:27,291 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pRSUMM-vlmK6G-pMyUMy
+2026-02-16 00:47:27,384 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3 (status=200)
+2026-02-16 00:47:27,400 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pRSUMM-vlmK6G-pMyUMy (status=200)
+INFO:     127.0.0.1:47488 - "GET /api/v1beta/deckcards/UyMSUM-O6E3fh-pyRMp3/list HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47504 - "GET /api/v1beta/deckcards/pRSUMM-vlmK6G-pMyUMy/list HTTP/1.0" 200 OK
+2026-02-16 01:05:44,446 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3
+2026-02-16 01:05:44,455 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pRSUMM-vlmK6G-pMyUMy
+2026-02-16 01:05:44,501 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3
+2026-02-16 01:05:44,511 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pRSUMM-vlmK6G-pMyUMy
+2026-02-16 01:05:44,698 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3 (status=200)
+2026-02-16 01:05:44,724 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pRSUMM-vlmK6G-pMyUMy (status=200)
+2026-02-16 01:05:44,751 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pRSUMM-vlmK6G-pMyUMy (status=200)
+INFO:     127.0.0.1:38984 - "GET /api/v1beta/deckcards/pRSUMM-vlmK6G-pMyUMy/list HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38972 - "GET /api/v1beta/deckcards/UyMSUM-O6E3fh-pyRMp3/list HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39012 - "GET /api/v1beta/deckcards/pRSUMM-vlmK6G-pMyUMy/list HTTP/1.0" 200 OK
+2026-02-16 01:05:44,810 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3 (status=200)
+INFO:     127.0.0.1:39000 - "GET /api/v1beta/deckcards/UyMSUM-O6E3fh-pyRMp3/list HTTP/1.0" 200 OK
+2026-02-16 01:06:15,721 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-16 01:06:16,034 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+INFO:     127.0.0.1:46044 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/summary HTTP/1.0" 200 OK
+2026-02-16 01:43:55,883 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3
+2026-02-16 01:43:56,096 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/UyMSUM-O6E3fh-pyRMp3 (status=200)
+INFO:     127.0.0.1:37484 - "GET /api/v1beta/deckcards/UyMSUM-O6E3fh-pyRMp3/summary HTTP/1.0" 200 OK
+2026-02-16 01:44:35,801 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8cxccK-7hZmgw-JDG8xx
+2026-02-16 01:44:35,945 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8cxccK-7hZmgw-JDG8xx (status=200)
+INFO:     127.0.0.1:35008 - "GET /api/v1beta/deckcards/8cxccK-7hZmgw-JDG8xx/summary HTTP/1.0" 200 OK
+2026-02-16 01:44:57,941 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-16 01:44:58,052 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+INFO:     127.0.0.1:41082 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/summary HTTP/1.0" 200 OK
+2026-02-16 01:45:00,917 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-16 01:45:01,025 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+INFO:     127.0.0.1:41096 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/summary HTTP/1.0" 200 OK
+2026-02-16 20:14:17,297 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/cY88xG-xmVCpH-GGcKx8
+2026-02-16 20:14:17,367 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/cY88xG-xmVCpH-GGcKx8 (status=200)
+INFO:     127.0.0.1:42972 - "GET /deckcards/cY88xG-xmVCpH-GGcKx8 HTTP/1.0" 200 OK
+2026-02-16 20:57:12,876 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/JcGc8a-JCytba-Dcxx8x
+2026-02-16 20:57:12,990 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/JcGc8a-JCytba-Dcxx8x (status=200)
+INFO:     127.0.0.1:46352 - "GET /deckcards/JcGc8a-JCytba-Dcxx8x HTTP/1.0" 200 OK
+2026-02-17 11:39:06,645 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-17 11:39:06,651 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 11:39:06,680 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 11:39:06,685 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 11:39:06,693 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 11:39:06,708 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 11:39:06,711 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 11:39:06,714 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 11:39:06,720 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 11:39:06,730 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+2026-02-17 11:39:06,745 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+2026-02-17 11:39:06,755 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 11:39:06,870 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+2026-02-17 11:39:06,875 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 11:39:06,911 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+2026-02-17 11:39:06,935 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 11:39:06,937 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 11:39:06,939 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 11:39:06,941 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 11:39:06,942 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf
+INFO:     127.0.0.1:55128 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:55124 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 11:39:06,972 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+INFO:     127.0.0.1:55112 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 11:39:07,002 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+2026-02-17 11:39:07,033 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+2026-02-17 11:39:07,077 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+2026-02-17 11:39:07,085 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+2026-02-17 11:39:07,118 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+INFO:     127.0.0.1:55164 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 11:39:07,133 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+INFO:     127.0.0.1:55150 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:55204 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:55196 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:55214 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:55136 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:55180 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 11:39:07,237 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+2026-02-17 11:39:07,258 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+INFO:     127.0.0.1:55220 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 11:39:07,299 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf (status=200)
+INFO:     127.0.0.1:55226 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 11:39:07,312 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+INFO:     127.0.0.1:55248 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 11:39:07,375 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+INFO:     127.0.0.1:55270 - "GET /api/v1beta/deckcards/bV1FFk-4VJJJO-kV5FFf/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:55256 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:55236 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 16:07:38,895 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-17 16:07:38,908 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 16:07:38,909 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 16:07:38,934 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 16:07:38,939 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 16:07:38,942 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 16:07:38,947 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 16:07:38,957 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 16:07:38,959 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 16:07:38,962 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 16:07:38,968 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 16:07:38,979 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 16:07:38,991 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+2026-02-17 16:07:39,010 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+2026-02-17 16:07:39,036 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 16:07:39,045 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 16:07:39,047 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+INFO:     127.0.0.1:54144 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 16:07:39,054 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+2026-02-17 16:07:39,064 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+2026-02-17 16:07:39,092 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+2026-02-17 16:07:39,102 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf
+2026-02-17 16:07:39,103 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+INFO:     127.0.0.1:54154 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 16:07:39,104 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+2026-02-17 16:07:39,104 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+INFO:     127.0.0.1:54168 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 16:07:39,220 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+INFO:     127.0.0.1:54128 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:54122 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:54190 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:54184 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 16:07:39,262 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+INFO:     127.0.0.1:54198 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 16:07:39,281 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+2026-02-17 16:07:39,288 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+INFO:     127.0.0.1:54228 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 16:07:39,299 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+2026-02-17 16:07:39,368 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+2026-02-17 16:07:39,384 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+2026-02-17 16:07:39,395 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf (status=200)
+INFO:     127.0.0.1:54188 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:54214 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:54244 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:54260 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:54262 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:54252 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:54272 - "GET /api/v1beta/deckcards/bV1FFk-4VJJJO-kV5FFf/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 18:36:20,918 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-17 18:36:20,964 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 18:36:20,971 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 18:36:20,975 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 18:36:20,986 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 18:36:20,988 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 18:36:20,997 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 18:36:20,998 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 18:36:21,009 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 18:36:21,015 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+2026-02-17 18:36:21,035 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 18:36:21,047 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 18:36:21,054 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 18:36:21,066 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 18:36:21,084 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+2026-02-17 18:36:21,122 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 18:36:21,127 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+2026-02-17 18:36:21,231 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+2026-02-17 18:36:21,253 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf
+2026-02-17 18:36:21,294 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 18:36:21,295 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+INFO:     127.0.0.1:43112 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 18:36:21,296 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+INFO:     127.0.0.1:43122 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 18:36:21,344 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+INFO:     127.0.0.1:43198 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43184 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 18:36:21,344 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+INFO:     127.0.0.1:43200 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43126 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 18:36:21,358 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+2026-02-17 18:36:21,410 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+INFO:     127.0.0.1:43172 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 18:36:21,443 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+2026-02-17 18:36:21,514 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+2026-02-17 18:36:21,551 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf (status=200)
+2026-02-17 18:36:21,593 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+INFO:     127.0.0.1:43140 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43216 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43156 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43240 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 18:36:21,636 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+INFO:     127.0.0.1:43262 - "GET /api/v1beta/deckcards/bV1FFk-4VJJJO-kV5FFf/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 18:36:21,670 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+INFO:     127.0.0.1:43230 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43226 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43256 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43214 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:24,275 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-17 20:26:24,286 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 20:26:24,289 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 20:26:24,294 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 20:26:24,298 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 20:26:24,309 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 20:26:24,317 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 20:26:24,336 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 20:26:24,353 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 20:26:24,358 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 20:26:24,367 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 20:26:24,368 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+2026-02-17 20:26:24,391 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 20:26:24,400 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 20:26:24,402 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+2026-02-17 20:26:24,419 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+2026-02-17 20:26:24,420 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 20:26:24,428 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 20:26:24,436 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+2026-02-17 20:26:24,442 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+INFO:     127.0.0.1:52494 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:24,450 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+INFO:     127.0.0.1:52524 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:24,473 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf
+INFO:     127.0.0.1:52504 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:24,506 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+2026-02-17 20:26:24,519 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+2026-02-17 20:26:24,537 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+2026-02-17 20:26:24,571 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+2026-02-17 20:26:24,594 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+INFO:     127.0.0.1:52534 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52496 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:24,594 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+INFO:     127.0.0.1:52502 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:24,698 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+2026-02-17 20:26:24,716 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+INFO:     127.0.0.1:52564 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52568 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52544 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52520 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:24,785 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+INFO:     127.0.0.1:52584 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52592 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52594 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:24,831 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf (status=200)
+INFO:     127.0.0.1:52558 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52598 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52606 - "GET /api/v1beta/deckcards/bV1FFk-4VJJJO-kV5FFf/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:25,926 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-17 20:26:25,997 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 20:26:25,998 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 20:26:25,998 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 20:26:25,999 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+INFO:     127.0.0.1:52622 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:26,051 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 20:26:26,054 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 20:26:26,055 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 20:26:26,056 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 20:26:26,056 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 20:26:26,056 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 20:26:26,057 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 20:26:26,057 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 20:26:26,060 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf
+2026-02-17 20:26:26,060 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 20:26:26,060 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 20:26:26,061 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 20:26:26,108 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+2026-02-17 20:26:26,125 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+2026-02-17 20:26:26,159 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+2026-02-17 20:26:26,195 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+2026-02-17 20:26:26,236 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+2026-02-17 20:26:26,237 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+2026-02-17 20:26:26,251 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+2026-02-17 20:26:26,385 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+2026-02-17 20:26:26,398 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+2026-02-17 20:26:26,405 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+2026-02-17 20:26:26,474 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+2026-02-17 20:26:26,491 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+INFO:     127.0.0.1:52624 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:26,556 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf (status=200)
+INFO:     127.0.0.1:52690 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:26,582 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+INFO:     127.0.0.1:52630 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52644 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52712 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:26,646 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+INFO:     127.0.0.1:52658 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52704 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52726 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52654 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52674 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52754 - "GET /api/v1beta/deckcards/bV1FFk-4VJJJO-kV5FFf/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52666 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52688 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52740 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52696 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:26,689 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 20:26:26,691 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 20:26:26,691 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 20:26:26,691 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 20:26:26,692 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 20:26:26,692 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 20:26:26,692 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 20:26:26,692 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 20:26:26,692 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 20:26:26,692 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 20:26:26,692 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 20:26:26,692 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf
+2026-02-17 20:26:26,692 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-17 20:26:26,692 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 20:26:26,692 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 20:26:26,693 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 20:26:26,780 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+2026-02-17 20:26:26,790 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+2026-02-17 20:26:26,822 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+INFO:     127.0.0.1:52782 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52794 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:26,855 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+2026-02-17 20:26:26,860 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+2026-02-17 20:26:26,890 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+2026-02-17 20:26:26,890 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+2026-02-17 20:26:26,903 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+2026-02-17 20:26:26,915 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+2026-02-17 20:26:26,931 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+2026-02-17 20:26:26,981 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf (status=200)
+2026-02-17 20:26:26,997 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+2026-02-17 20:26:27,033 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+2026-02-17 20:26:27,058 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+INFO:     127.0.0.1:52760 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:27,092 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+2026-02-17 20:26:27,120 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+INFO:     127.0.0.1:52814 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52800 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52768 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52766 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52758 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52832 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52790 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52828 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52756 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52786 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52856 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52844 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52864 - "GET /api/v1beta/deckcards/bV1FFk-4VJJJO-kV5FFf/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:35,072 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp
+2026-02-17 20:26:35,131 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 20:26:35,133 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK
+2026-02-17 20:26:35,159 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/pyMRMS-aodLa1-ypyRXp (status=200)
+INFO:     127.0.0.1:33640 - "GET /api/v1beta/deckcards/pyMRMS-aodLa1-ypyRXp/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:35,198 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 20:26:35,203 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 20:26:35,204 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 20:26:35,208 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 20:26:35,209 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 20:26:35,211 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4
+2026-02-17 20:26:35,214 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg
+2026-02-17 20:26:35,216 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF
+2026-02-17 20:26:35,216 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf
+2026-02-17 20:26:35,217 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb
+2026-02-17 20:26:35,217 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 20:26:35,219 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx
+2026-02-17 20:26:35,221 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+2026-02-17 20:26:35,223 [INFO] main: Request start: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM
+2026-02-17 20:26:35,249 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/8xDcG8-1L4N7B-KYxYcK (status=200)
+INFO:     127.0.0.1:33664 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:33650 - "GET /api/v1beta/deckcards/8xDcG8-1L4N7B-KYxYcK/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:35,338 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+2026-02-17 20:26:35,372 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+2026-02-17 20:26:35,383 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/bV1FFk-4VJJJO-kV5FFf (status=200)
+INFO:     127.0.0.1:33680 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:35,402 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+2026-02-17 20:26:35,408 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+2026-02-17 20:26:35,419 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Yc8a88-mxPLQY-xKGYc4 (status=200)
+2026-02-17 20:26:35,580 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+2026-02-17 20:26:35,610 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/gning6-LC48Hy-gLL9gg (status=200)
+INFO:     127.0.0.1:33708 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:33706 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+2026-02-17 20:26:35,655 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+2026-02-17 20:26:35,669 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/c4Gc8c-PzDB0c-xKD8Gx (status=200)
+2026-02-17 20:26:35,679 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/Vkbkw1-9PvAFX-bfvFkF (status=200)
+2026-02-17 20:26:35,695 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/k1kFFV-WX1prU-fk51Vb (status=200)
+2026-02-17 20:26:35,763 [INFO] main: Request succeeded: https://www.pokemon-card.com/deck/result.html/deckID/RpM33p-u4Rd9N-3ySySM (status=200)
+INFO:     127.0.0.1:33696 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:33734 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:33744 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:33770 - "GET /api/v1beta/deckcards/bV1FFk-4VJJJO-kV5FFf/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:33754 - "GET /api/v1beta/deckcards/k1kFFV-WX1prU-fk51Vb/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:33690 - "GET /api/v1beta/deckcards/Yc8a88-mxPLQY-xKGYc4/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:33698 - "GET /api/v1beta/deckcards/Vkbkw1-9PvAFX-bfvFkF/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:33718 - "GET /api/v1beta/deckcards/gning6-LC48Hy-gLL9gg/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:33712 - "GET /api/v1beta/deckcards/c4Gc8c-PzDB0c-xKD8Gx/list HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:33672 - "GET /api/v1beta/deckcards/RpM33p-u4Rd9N-3ySySM/list HTTP/1.0" 500 Internal Server Error
+

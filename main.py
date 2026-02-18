@@ -759,12 +759,12 @@ def create_v1beta_deckcards(conn, deck_code):
 
         if total_card_count != 60:
             logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
-            return JSONResponse(content={}, status_code=500)
+            return JSONResponse(content=[], status_code=500)
 
         return ret_list
 
     except Exception:
-        return JSONResponse(content={}, status_code=500)
+        return JSONResponse(content=[], status_code=500)
 
 
 def create_v1beta_deckcards_detail(conn, deck_code):
@@ -1207,34 +1207,49 @@ def create_v1beta_deckcards_list(conn, deck_code):
 
             for card_id, count in card_count_dict.items():
                 if item['id'] == "deck_pke":
-                    with conn.cursor() as cur:
-                        ability = ""
-                        attacks = []
-                        sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
-                        cur.execute(sql, (card_id,))
-                        row = cur.fetchone()
+                    try:
+                        with conn.cursor() as cur:
+                            ability = ""
+                            attacks = []
+                            sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
+                            cur.execute(sql, (card_id,))
+                            row = cur.fetchone()
 
-                        if row is None:
-                            logger.exception(f"Record not found: pokemon_cards.id={card_id}")
-                            return JSONResponse(content={}, status_code=500)
-                        else:
-                            ability = row[0]
-                            attacks = row[1].split('/')
+                            if row is None:
+                                logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                                return JSONResponse(content={}, status_code=500)
+                            else:
+                                ability = row[0]
+                                attacks = row[1].split('/')
 
-                        cur.close()
+                            cur.close()
 
-                    for i in range(count):
-                        card_info = {
-                            "card_id": int(card_id),
-                            "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
-                            "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                            "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
-                            "ability": ability,
-                            "attacks": attacks,
-                        }
+                        for i in range(count):
+                            card_info = {
+                                "card_id": int(card_id),
+                                "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                                "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
+                                "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                                "ability": ability,
+                                "attacks": attacks,
+                            }
 
-                        deckcards.append(card_info)
-                        card_type_count += 1
+                            deckcards.append(card_info)
+                            card_type_count += 1
+                    except psycopg.Error as e:
+                        logger.exception(f"PostgreSQL error occurred. card_id={card_id}")
+                        logger.error("=== PostgreSQL Error ===")
+                        logger.error(f"Message: {e}")
+                        logger.error(f"SQLSTATE: {e.sqlstate}")
+                        logger.error(f"Diag message: {e.diag.message_primary}")
+                        logger.error(f"Detail: {e.diag.message_detail}")
+                        logger.error(f"Hint: {e.diag.message_hint}")
+                        logger.error(f"card_id: {card_id}")
+                        logger.error("========================", exc_info=True)
+
+                    except Exception:
+                        logger.exception(f"Unexpected error. card_id={card_id}")
+                        return JSONResponse(content={}, status_code=500)
                 else:
                     for i in range(count):
                         card_info = {
@@ -1252,12 +1267,12 @@ def create_v1beta_deckcards_list(conn, deck_code):
 
         if total_card_count != 60:
             logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
-            return JSONResponse(content={}, status_code=500)
+            return JSONResponse(content=[], status_code=500)
 
         return ret_list
 
     except Exception:
-        return JSONResponse(content={}, status_code=500)
+        return JSONResponse(content=[], status_code=500)
 
 
 def create_v1beta_deckcards_summary(conn, deck_code):
