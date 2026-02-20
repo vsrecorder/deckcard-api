@@ -2,11 +2,11 @@ SHELL := /bin/bash
 
 .PHONY: source
 source:
-	fish -C "source .venv/bin/activate.fish"
+	fish -C "source .venv/bin/activate.fish; pip install -r requirements.txt"
 
 .PHONY: run
 run:
-	fish -C "source .venv/bin/activate.fish; uvicorn main:app --host 0.0.0.0 --port 8080"
+	fish -C "source .venv/bin/activate.fish; pip install -r requirements.txt; uvicorn main:app --host 0.0.0.0 --port 8080"
 
 
 

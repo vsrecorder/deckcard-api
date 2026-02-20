@@ -6,6 +6,8 @@ import logging
 from collections import OrderedDict
 
 import psycopg
+from psycopg_pool import ConnectionPool
+
 from dotenv import load_dotenv
 
 from fastapi import FastAPI, HTTPException
@@ -285,7 +287,7 @@ def create_deckcards(deck_code):
 
 
 
-def create_deckcards_detail(conn, deck_code):
+def create_deckcards_detail(deck_code):
     try:
         logger.info(f"Request start: {url + deck_code}")
 
@@ -472,21 +474,22 @@ def create_deckcards_detail(conn, deck_code):
 
             for card_id, count in card_count_dict.items():
                 if item['id'] == "deck_pke":
-                    with conn.cursor() as cur:
-                        ability = ""
-                        attacks = []
-                        sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
-                        cur.execute(sql, (card_id,))
-                        row = cur.fetchone()
+                    with pool.connection() as conn:
+                        with conn.cursor() as cur:
+                            ability = ""
+                            attacks = []
 
-                        if row is None:
-                            logger.exception(f"Record not found: pokemon_cards.id={card_id}")
-                            return JSONResponse(content={}, status_code=500)
-                        else:
+                            sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
+                            cur.execute(sql, (card_id,))
+                            row = cur.fetchone()
+
+                            if row is None:
+                                logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                                return JSONResponse(content={}, status_code=500)
+
                             ability = row[0]
                             attacks = row[1].split('/')
 
-                        cur.close()
 
                     card_info = {
                         "id": int(card_id),
@@ -526,7 +529,7 @@ def create_deckcards_detail(conn, deck_code):
 
 
 
-def create_v1beta_deckcards(conn, deck_code):
+def create_v1beta_deckcards(deck_code):
     try:
         logger.info(f"Request start: {url + deck_code}")
 
@@ -714,21 +717,21 @@ def create_v1beta_deckcards(conn, deck_code):
 
             for card_id, count in card_count_dict.items():
                 if item['id'] == "deck_pke":
-                    with conn.cursor() as cur:
-                        ability = ""
-                        attacks = []
-                        sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
-                        cur.execute(sql, (card_id,))
-                        row = cur.fetchone()
+                    with pool.connection() as conn:
+                        with conn.cursor() as cur:
+                            ability = ""
+                            attacks = []
 
-                        if row is None:
-                            logger.exception(f"Record not found: pokemon_cards.id={card_id}")
-                            return JSONResponse(content={}, status_code=500)
-                        else:
+                            sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
+                            cur.execute(sql, (card_id,))
+                            row = cur.fetchone()
+
+                            if row is None:
+                                logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                                return JSONResponse(content={}, status_code=500)
+
                             ability = row[0]
                             attacks = row[1].split('/')
-
-                        cur.close()
 
                     card_info = {
                         "card_id": int(card_id),
@@ -767,7 +770,7 @@ def create_v1beta_deckcards(conn, deck_code):
         return JSONResponse(content=[], status_code=500)
 
 
-def create_v1beta_deckcards_detail(conn, deck_code):
+def create_v1beta_deckcards_detail(deck_code):
     try:
         logger.info(f"Request start: {url + deck_code}")
 
@@ -955,21 +958,21 @@ def create_v1beta_deckcards_detail(conn, deck_code):
 
             for card_id, count in card_count_dict.items():
                 if item['id'] == "deck_pke":
-                    with conn.cursor() as cur:
-                        ability = ""
-                        attacks = []
-                        sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
-                        cur.execute(sql, (card_id,))
-                        row = cur.fetchone()
+                    with pool.connection() as conn:
+                        with conn.cursor() as cur:
+                            ability = ""
+                            attacks = []
 
-                        if row is None:
-                            logger.exception(f"Record not found: pokemon_cards.id={card_id}")
-                            return JSONResponse(content={}, status_code=500)
-                        else:
+                            sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
+                            cur.execute(sql, (card_id,))
+                            row = cur.fetchone()
+
+                            if row is None:
+                                logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                                return JSONResponse(content={}, status_code=500)
+
                             ability = row[0]
                             attacks = row[1].split('/')
-
-                        cur.close()
 
                     card_info = {
                         "card_id": int(card_id),
@@ -1019,7 +1022,7 @@ def create_v1beta_deckcards_detail(conn, deck_code):
         return JSONResponse(content={}, status_code=500)
 
 
-def create_v1beta_deckcards_list(conn, deck_code):
+def create_v1beta_deckcards_list(deck_code):
     try:
         logger.info(f"Request start: {url + deck_code}")
 
@@ -1208,21 +1211,21 @@ def create_v1beta_deckcards_list(conn, deck_code):
             for card_id, count in card_count_dict.items():
                 if item['id'] == "deck_pke":
                     try:
-                        with conn.cursor() as cur:
-                            ability = ""
-                            attacks = []
-                            sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
-                            cur.execute(sql, (card_id,))
-                            row = cur.fetchone()
+                        with pool.connection() as conn:
+                            with conn.cursor() as cur:
+                                ability = ""
+                                attacks = []
 
-                            if row is None:
-                                logger.exception(f"Record not found: pokemon_cards.id={card_id}")
-                                return JSONResponse(content={}, status_code=500)
-                            else:
+                                sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
+                                cur.execute(sql, (card_id,))
+                                row = cur.fetchone()
+
+                                if row is None:
+                                    logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                                    return JSONResponse(content={}, status_code=500)
+
                                 ability = row[0]
                                 attacks = row[1].split('/')
-
-                            cur.close()
 
                         for i in range(count):
                             card_info = {
@@ -1275,7 +1278,7 @@ def create_v1beta_deckcards_list(conn, deck_code):
         return JSONResponse(content=[], status_code=500)
 
 
-def create_v1beta_deckcards_summary(conn, deck_code):
+def create_v1beta_deckcards_summary(deck_code):
     try:
         logger.info(f"Request start: {url + deck_code}")
 
@@ -1463,21 +1466,21 @@ def create_v1beta_deckcards_summary(conn, deck_code):
 
             for card_id, count in card_count_dict.items():
                 if item['id'] == "deck_pke":
-                    with conn.cursor() as cur:
-                        ability = ""
-                        attacks = []
-                        sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
-                        cur.execute(sql, (card_id,))
-                        row = cur.fetchone()
+                    with pool.connection() as conn:
+                        with conn.cursor() as cur:
+                            ability = ""
+                            attacks = []
 
-                        if row is None:
-                            logger.exception(f"Record not found: pokemon_cards.id={card_id}")
-                            return JSONResponse(content={}, status_code=500)
-                        else:
+                            sql = "SELECT ability, attack FROM pokemon_cards WHERE id = %s"
+                            cur.execute(sql, (card_id,))
+                            row = cur.fetchone()
+
+                            if row is None:
+                                logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                                return JSONResponse(content={}, status_code=500)
+
                             ability = row[0]
                             attacks = row[1].split('/')
-
-                        cur.close()
 
                     card_info = {
                         "card_id": int(card_id),
@@ -1556,9 +1559,9 @@ def find_acespec(deck_code):
         return JSONResponse(content={}, status_code=500)
 
 
-def create_v1beta_acespec(conn, deck_code):
+def create_v1beta_acespec(deck_code):
     try:
-        deckcards = create_v1beta_deckcards(conn, deck_code)
+        deckcards = create_v1beta_deckcards(deck_code)
 
         for card in deckcards:
             if card["card_name"] in acespecs:
@@ -1581,7 +1584,12 @@ password = os.getenv("DB_USER_PASSWORD")
 dbname = os.getenv("DB_NAME")
 dsn = "host={} port={} user={} password={} dbname={} sslmode=disable".format(host, port, user, password, dbname)
 
-conn = psycopg.connect(dsn)
+pool = ConnectionPool(
+    conninfo=dsn,
+    min_size=5,
+    max_size=10,
+    timeout=5,
+)
 
 app = FastAPI()
 
@@ -1596,29 +1604,29 @@ def find_acespec_app(deck_code):
 
 @app.get("/deckcards/{deck_code}/detail")
 def create_deckcards_detail_app(deck_code):
-    return create_deckcards_detail(conn, deck_code)
+    return create_deckcards_detail(deck_code)
 
 
 
 @app.get("/api/v1beta/deckcards/{deck_code}")
 def create_v1beta_deckcards_app(deck_code):
-    return create_v1beta_deckcards(conn, deck_code)
+    return create_v1beta_deckcards(deck_code)
 
 @app.get("/api/v1beta/deckcards/{deck_code}/acespec")
 def create_v1beta_deckcards_acespec_app(deck_code):
-    return create_v1beta_acespec(conn, deck_code)
+    return create_v1beta_acespec(deck_code)
 
 @app.get("/api/v1beta/deckcards/{deck_code}/detail")
 def create_v1beta_deckcards_detail_app(deck_code):
-    return create_v1beta_deckcards_detail(conn, deck_code)
+    return create_v1beta_deckcards_detail(deck_code)
 
 @app.get("/api/v1beta/deckcards/{deck_code}/list")
 def create_v1beta_deckcards_list_app(deck_code):
-    return create_v1beta_deckcards_list(conn, deck_code)
+    return create_v1beta_deckcards_list(deck_code)
 
 @app.get("/api/v1beta/deckcards/{deck_code}/summary")
 def create_v1beta_deckcards_summary_app(deck_code):
-    return create_v1beta_deckcards_summary(conn, deck_code)
+    return create_v1beta_deckcards_summary(deck_code)
 
 
 
