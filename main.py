@@ -1548,6 +1548,9 @@ def find_acespec(deck_code):
     try:
         deckcards = create_deckcards(deck_code)
 
+        if isinstance(deckcards, JSONResponse):
+            return deckcards
+
         for card in deckcards:
             if card["name"] in acespecs:
                 card["name"] = card["name"].replace("(ACE SPEC)", "")
@@ -1562,6 +1565,9 @@ def find_acespec(deck_code):
 def create_v1beta_acespec(deck_code):
     try:
         deckcards = create_v1beta_deckcards(deck_code)
+
+        if isinstance(deckcards, JSONResponse):
+            return deckcards
 
         for card in deckcards:
             if card["card_name"] in acespecs:
