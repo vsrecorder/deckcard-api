@@ -92,6 +92,8 @@ def create_deckcards(deck_code):
         res = requests.get(url + deck_code, timeout=3)
 
         if res.status_code == 404:
+            logger.info(f"Request failed: {url + deck_code} (status={res.status_code})")
+
             fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
 
             try:
@@ -122,9 +124,10 @@ def create_deckcards(deck_code):
                 logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
                 return JSONResponse(content={}, status_code=500)
 
-        res.raise_for_status()
+        else:
+            res.raise_for_status()
 
-        logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
@@ -327,6 +330,8 @@ def create_deckcards_detail(deck_code):
         res = requests.get(url + deck_code, timeout=3)
 
         if res.status_code == 404:
+            logger.info(f"Request failed: {url + deck_code} (status={res.status_code})")
+
             fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
 
             try:
@@ -357,9 +362,10 @@ def create_deckcards_detail(deck_code):
                 logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
                 return JSONResponse(content={}, status_code=500)
 
-        res.raise_for_status()
+        else:
+            res.raise_for_status()
 
-        logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
@@ -603,6 +609,8 @@ def create_v1beta_deckcards(deck_code):
         res = requests.get(url + deck_code, timeout=3)
 
         if res.status_code == 404:
+            logger.info(f"Request failed: {url + deck_code} (status={res.status_code})")
+
             fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
 
             try:
@@ -633,9 +641,10 @@ def create_v1beta_deckcards(deck_code):
                 logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
                 return JSONResponse(content={}, status_code=500)
 
-        res.raise_for_status()
+        else:
+            res.raise_for_status()
 
-        logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
@@ -877,6 +886,8 @@ def create_v1beta_deckcards_detail(deck_code):
         res = requests.get(url + deck_code, timeout=3)
 
         if res.status_code == 404:
+            logger.info(f"Request failed: {url + deck_code} (status={res.status_code})")
+
             fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
 
             try:
@@ -907,9 +918,10 @@ def create_v1beta_deckcards_detail(deck_code):
                 logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
                 return JSONResponse(content={}, status_code=500)
 
-        res.raise_for_status()
+        else:
+            res.raise_for_status()
 
-        logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
@@ -1162,6 +1174,8 @@ def create_v1beta_deckcards_list(deck_code):
         res = requests.get(url + deck_code, timeout=3)
 
         if res.status_code == 404:
+            logger.info(f"Request failed: {url + deck_code} (status={res.status_code})")
+
             fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
 
             try:
@@ -1192,9 +1206,10 @@ def create_v1beta_deckcards_list(deck_code):
                 logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
                 return JSONResponse(content={}, status_code=500)
 
-        res.raise_for_status()
+        else:
+            res.raise_for_status()
 
-        logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
@@ -1451,6 +1466,8 @@ def create_v1beta_deckcards_summary(deck_code):
         res = requests.get(url + deck_code, timeout=3)
 
         if res.status_code == 404:
+            logger.info(f"Request failed: {url + deck_code} (status={res.status_code})")
+
             fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
 
             try:
@@ -1481,9 +1498,10 @@ def create_v1beta_deckcards_summary(deck_code):
                 logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
                 return JSONResponse(content={}, status_code=500)
 
-        res.raise_for_status()
+        else:
+            res.raise_for_status()
 
-        logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
