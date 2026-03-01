@@ -21,8 +21,6 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 
-url = "https://www.pokemon-card.com/deck/result.html/deckID/"
-
 acespecs = [
     "ポケモン回収サイクロン",
     "ポケモン回収サイクロン(ACE SPEC)",
@@ -84,6 +82,7 @@ acespecs = [
     "つりざおMAX(ACE SPEC)",
 ]
 
+url = "https://xx8nnpgt.user.webaccel.jp/deck-result_html/"
 
 
 def create_deckcards(deck_code):
@@ -91,6 +90,38 @@ def create_deckcards(deck_code):
         logger.info(f"Request start: {url + deck_code}")
 
         res = requests.get(url + deck_code, timeout=3)
+
+        if res.status_code == 404:
+            fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
+
+            try:
+                logger.warning(f"Not Found (404): {url + deck_code}")
+
+                logger.info(f"Request start: {fallback_url + deck_code}")
+
+                res = requests.get(fallback_url + deck_code, timeout=3)
+
+                res.raise_for_status()
+
+                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+
+            except requests.exceptions.Timeout:
+                logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
+                return JSONResponse(content={}, status_code=504)
+
+            except requests.exceptions.HTTPError as e:
+                status = getattr(e.response, "status_code", 500)
+                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                return JSONResponse(content={}, status_code=status)
+
+            except requests.exceptions.ConnectionError as e:
+                logger.error(f"ConnectionError: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
+            except requests.exceptions.RequestException as e:
+                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
         res.raise_for_status()
 
         logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
@@ -111,6 +142,8 @@ def create_deckcards(deck_code):
     except requests.exceptions.RequestException as e:
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
+
+
 
     try:
         bs = BeautifulSoup(res.text, "html.parser")
@@ -292,6 +325,38 @@ def create_deckcards_detail(deck_code):
         logger.info(f"Request start: {url + deck_code}")
 
         res = requests.get(url + deck_code, timeout=3)
+
+        if res.status_code == 404:
+            fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
+
+            try:
+                logger.warning(f"Not Found (404): {url + deck_code}")
+
+                logger.info(f"Request start: {fallback_url + deck_code}")
+
+                res = requests.get(fallback_url + deck_code, timeout=3)
+
+                res.raise_for_status()
+
+                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+
+            except requests.exceptions.Timeout:
+                logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
+                return JSONResponse(content={}, status_code=504)
+
+            except requests.exceptions.HTTPError as e:
+                status = getattr(e.response, "status_code", 500)
+                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                return JSONResponse(content={}, status_code=status)
+
+            except requests.exceptions.ConnectionError as e:
+                logger.error(f"ConnectionError: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
+            except requests.exceptions.RequestException as e:
+                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
         res.raise_for_status()
 
         logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
@@ -312,6 +377,8 @@ def create_deckcards_detail(deck_code):
     except requests.exceptions.RequestException as e:
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
+
+
 
     try:
         bs = BeautifulSoup(res.text, "html.parser")
@@ -534,6 +601,38 @@ def create_v1beta_deckcards(deck_code):
         logger.info(f"Request start: {url + deck_code}")
 
         res = requests.get(url + deck_code, timeout=3)
+
+        if res.status_code == 404:
+            fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
+
+            try:
+                logger.warning(f"Not Found (404): {url + deck_code}")
+
+                logger.info(f"Request start: {fallback_url + deck_code}")
+
+                res = requests.get(fallback_url + deck_code, timeout=3)
+
+                res.raise_for_status()
+
+                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+
+            except requests.exceptions.Timeout:
+                logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
+                return JSONResponse(content={}, status_code=504)
+
+            except requests.exceptions.HTTPError as e:
+                status = getattr(e.response, "status_code", 500)
+                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                return JSONResponse(content={}, status_code=status)
+
+            except requests.exceptions.ConnectionError as e:
+                logger.error(f"ConnectionError: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
+            except requests.exceptions.RequestException as e:
+                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
         res.raise_for_status()
 
         logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
@@ -554,6 +653,7 @@ def create_v1beta_deckcards(deck_code):
     except requests.exceptions.RequestException as e:
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
+
 
 
     try:
@@ -775,6 +875,38 @@ def create_v1beta_deckcards_detail(deck_code):
         logger.info(f"Request start: {url + deck_code}")
 
         res = requests.get(url + deck_code, timeout=3)
+
+        if res.status_code == 404:
+            fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
+
+            try:
+                logger.warning(f"Not Found (404): {url + deck_code}")
+
+                logger.info(f"Request start: {fallback_url + deck_code}")
+
+                res = requests.get(fallback_url + deck_code, timeout=3)
+
+                res.raise_for_status()
+
+                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+
+            except requests.exceptions.Timeout:
+                logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
+                return JSONResponse(content={}, status_code=504)
+
+            except requests.exceptions.HTTPError as e:
+                status = getattr(e.response, "status_code", 500)
+                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                return JSONResponse(content={}, status_code=status)
+
+            except requests.exceptions.ConnectionError as e:
+                logger.error(f"ConnectionError: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
+            except requests.exceptions.RequestException as e:
+                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
         res.raise_for_status()
 
         logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
@@ -795,6 +927,7 @@ def create_v1beta_deckcards_detail(deck_code):
     except requests.exceptions.RequestException as e:
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
+
 
 
     try:
@@ -1027,6 +1160,38 @@ def create_v1beta_deckcards_list(deck_code):
         logger.info(f"Request start: {url + deck_code}")
 
         res = requests.get(url + deck_code, timeout=3)
+
+        if res.status_code == 404:
+            fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
+
+            try:
+                logger.warning(f"Not Found (404): {url + deck_code}")
+
+                logger.info(f"Request start: {fallback_url + deck_code}")
+
+                res = requests.get(fallback_url + deck_code, timeout=3)
+
+                res.raise_for_status()
+
+                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+
+            except requests.exceptions.Timeout:
+                logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
+                return JSONResponse(content={}, status_code=504)
+
+            except requests.exceptions.HTTPError as e:
+                status = getattr(e.response, "status_code", 500)
+                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                return JSONResponse(content={}, status_code=status)
+
+            except requests.exceptions.ConnectionError as e:
+                logger.error(f"ConnectionError: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
+            except requests.exceptions.RequestException as e:
+                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
         res.raise_for_status()
 
         logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
@@ -1047,6 +1212,7 @@ def create_v1beta_deckcards_list(deck_code):
     except requests.exceptions.RequestException as e:
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
+
 
 
     try:
@@ -1283,6 +1449,38 @@ def create_v1beta_deckcards_summary(deck_code):
         logger.info(f"Request start: {url + deck_code}")
 
         res = requests.get(url + deck_code, timeout=3)
+
+        if res.status_code == 404:
+            fallback_url = "https://www.pokemon-card.com/deck/result.html/deckID/"
+
+            try:
+                logger.warning(f"Not Found (404): {url + deck_code}")
+
+                logger.info(f"Request start: {fallback_url + deck_code}")
+
+                res = requests.get(fallback_url + deck_code, timeout=3)
+
+                res.raise_for_status()
+
+                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+
+            except requests.exceptions.Timeout:
+                logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
+                return JSONResponse(content={}, status_code=504)
+
+            except requests.exceptions.HTTPError as e:
+                status = getattr(e.response, "status_code", 500)
+                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                return JSONResponse(content={}, status_code=status)
+
+            except requests.exceptions.ConnectionError as e:
+                logger.error(f"ConnectionError: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
+            except requests.exceptions.RequestException as e:
+                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                return JSONResponse(content={}, status_code=500)
+
         res.raise_for_status()
 
         logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
@@ -1303,6 +1501,7 @@ def create_v1beta_deckcards_summary(deck_code):
     except requests.exceptions.RequestException as e:
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
+
 
 
     try:
