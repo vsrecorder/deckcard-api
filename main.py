@@ -15,6 +15,8 @@ from fastapi.responses import JSONResponse
 
 from bs4 import BeautifulSoup
 
+import cachetools
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     level=logging.INFO,
@@ -315,6 +317,10 @@ def create_deckcards(deck_code):
         if total_card_count != 60:
             logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
             return JSONResponse(content={}, status_code=500)
+
+        # 結果をキャッシュ
+        deckcards_cache[deck_code] = deckcards
+        logger.info(f"[deckcards] cache store deck_code={deck_code}")
 
         return deckcards
 
@@ -1453,6 +1459,10 @@ def create_v1beta_deckcards_list(deck_code):
             logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
             return JSONResponse(content=[], status_code=500)
 
+        # 結果をキャッシュ
+        deck_list_cache[deck_code] = ret_list
+        logger.info(f"[deckcards/list] cache store deck_code={deck_code}")
+
         return ret_list
 
     except Exception:
@@ -1756,6 +1766,10 @@ def create_v1beta_deckcards_summary(deck_code):
             logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
             return JSONResponse(content={}, status_code=500)
 
+        # 結果をキャッシュ
+        deck_summary_cache[deck_code] = ret_dict
+        logger.info(f"[deckcards/summary] cache store deck_code={deck_code}")
+
         return ret_dict
     except Exception:
         return JSONResponse(content={}, status_code=500)
@@ -1790,6 +1804,11 @@ def create_v1beta_acespec(deck_code):
             if card["card_name"] in acespecs:
                 card["card_name"] = card["card_name"].replace("(ACE SPEC)", "")
                 del card["card_count"]
+
+                # 結果をキャッシュ
+                acespec_cache[deck_code] = card
+                logger.info(f"[acespec] cache store deck_code={deck_code}")
+
                 return card
 
         return JSONResponse(content={}, status_code=204)
@@ -1817,9 +1836,22 @@ pool = ConnectionPool(
 app = FastAPI()
 
 
+deckcards_cache = cachetools.LRUCache(maxsize=2000)
+acespec_cache = cachetools.LRUCache(maxsize=2000)
+
+deck_list_cache = cachetools.LFUCache(maxsize=2000)
+deck_summary_cache = cachetools.LFUCache(maxsize=2000)
+
+
 @app.get("/deckcards/{deck_code}")
 def create_deckcards_app(deck_code):
-    return create_deckcards(deck_code)
+    if deck_code in deckcards_cache:
+        logger.info(f"[deckcards] cache hit deck_code={deck_code}")
+        return deckcards_cache[deck_code]
+    else:
+        logger.info(f"[deckcards] cache miss deck_code={deck_code}")
+        return create_deckcards(deck_code)
+    
 
 @app.get("/deckcards/{deck_code}/acespec")
 def find_acespec_app(deck_code):
@@ -1837,7 +1869,12 @@ def create_v1beta_deckcards_app(deck_code):
 
 @app.get("/api/v1beta/deckcards/{deck_code}/acespec")
 def create_v1beta_deckcards_acespec_app(deck_code):
-    return create_v1beta_acespec(deck_code)
+    if deck_code in acespec_cache:
+        logger.info(f"[acespec] cache hit deck_code={deck_code}")
+        return acespec_cache[deck_code]
+    else:
+        logger.info(f"[acespec] cache miss deck_code={deck_code}")
+        return create_v1beta_acespec(deck_code)
 
 @app.get("/api/v1beta/deckcards/{deck_code}/detail")
 def create_v1beta_deckcards_detail_app(deck_code):
@@ -1845,11 +1882,21 @@ def create_v1beta_deckcards_detail_app(deck_code):
 
 @app.get("/api/v1beta/deckcards/{deck_code}/list")
 def create_v1beta_deckcards_list_app(deck_code):
-    return create_v1beta_deckcards_list(deck_code)
+    if deck_code in deck_list_cache:
+        logger.info(f"[deckcards/list] cache hit deck_code={deck_code}")
+        return deck_list_cache[deck_code]
+    else:
+        logger.info(f"[deckcards/list] cache miss deck_code={deck_code}")
+        return create_v1beta_deckcards_list(deck_code)
 
 @app.get("/api/v1beta/deckcards/{deck_code}/summary")
 def create_v1beta_deckcards_summary_app(deck_code):
-    return create_v1beta_deckcards_summary(deck_code)
+    if deck_code in deck_summary_cache:
+        logger.info(f"[deckcards/summary] cache hit deck_code={deck_code}")
+        return deck_summary_cache[deck_code]
+    else:
+        logger.info(f"[deckcards/summary] cache miss deck_code={deck_code}")
+        return create_v1beta_deckcards_summary(deck_code)
 
 
 
