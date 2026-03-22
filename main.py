@@ -1788,7 +1788,7 @@ def find_acespec(deck_code):
                 del card["count"]
                 return card
 
-        return JSONResponse(content={}, status_code=204)
+        return JSONResponse(status_code=204)
     except Exception:
         return JSONResponse(content={}, status_code=500)
 
@@ -1811,7 +1811,7 @@ def create_v1beta_acespec(deck_code):
 
                 return card
 
-        return JSONResponse(content={}, status_code=204)
+        return JSONResponse(status_code=204)
     except Exception:
         return JSONResponse(content={}, status_code=500)
 
