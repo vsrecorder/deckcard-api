@@ -1,14 +1,12 @@
 SHELL := /bin/bash
 
-.PHONY: source
-source:
-	fish -C "source .venv/bin/activate.fish; pip install -r requirements.txt"
+.PHONY: install
+install:
+	poetry install
 
 .PHONY: run
-run:
-	fish -C "source .venv/bin/activate.fish; pip install -r requirements.txt; uvicorn main:app --host 0.0.0.0 --port 8080"
-
-
+run: install
+	poetry run python main.py
 
 .PHONY: image
 image:
@@ -24,7 +22,7 @@ restart:
 
 .PHONY: up
 up:
-	docker compose up -d
+	docker compose up
 
 .PHONY: down
 down:

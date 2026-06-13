@@ -1,11 +1,24 @@
 FROM python:3.11.14-slim
 
-RUN apt-get update
-RUN apt-get install -y uvicorn
-RUN apt-get clean
+RUN apt-get update && apt-get install -y \
+    curl \
+    build-essential \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY ./ ./
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir poetry
 
-CMD ["uvicorn", "main:app", "--workers", "1", "--host", "0.0.0.0", "--port", "8080"]
+WORKDIR /app
+
+COPY pyproject.toml poetry.lock* ./
+
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi
+
+COPY . .
+
+CMD ["gunicorn", "main:app", \
+    "-k", "uvicorn.workers.UvicornWorker", \
+    "-w", "2", \
+    "-b", "0.0.0.0:8080", \
+    "--timeout", "60"]
