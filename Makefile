@@ -14,8 +14,8 @@ run: install
 
 .PHONY: image
 image:
-	docker build -t vsrecorder/deckcard-api:local .
-	docker push     vsrecorder/deckcard-api:local
+	docker build -t vsrecorder/deckcard-api:latest .
+	docker push     vsrecorder/deckcard-api:latest
 
 .PHONY: deploy
 deploy:

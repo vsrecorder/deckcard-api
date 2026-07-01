@@ -107,7 +107,9 @@ def create_deckcards(deck_code):
 
                 res.raise_for_status()
 
-                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+                logger.info(
+                    f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})"
+                )
 
             except requests.exceptions.Timeout:
                 logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
@@ -115,7 +117,9 @@ def create_deckcards(deck_code):
 
             except requests.exceptions.HTTPError as e:
                 status = getattr(e.response, "status_code", 500)
-                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                logger.error(
+                    f"HTTPError: {fallback_url + deck_code} -> status {status}"
+                )
                 return JSONResponse(content={}, status_code=status)
 
             except requests.exceptions.ConnectionError as e:
@@ -123,13 +127,17 @@ def create_deckcards(deck_code):
                 return JSONResponse(content={}, status_code=500)
 
             except requests.exceptions.RequestException as e:
-                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                logger.exception(
+                    f"Unexpected RequestException: {fallback_url + deck_code} -> {e}"
+                )
                 return JSONResponse(content={}, status_code=500)
 
         else:
             res.raise_for_status()
 
-            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(
+                f"Request succeeded: {url + deck_code} (status={res.status_code})"
+            )
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
@@ -148,8 +156,6 @@ def create_deckcards(deck_code):
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
 
-
-
     try:
         bs = BeautifulSoup(res.text, "html.parser")
 
@@ -158,14 +164,16 @@ def create_deckcards(deck_code):
         card_image_dict = {}
         card_count_dict = {}
 
-        if len(bs.find_all('script', attrs={"type": "", "src": ""})) != 2:
-            count = len(bs.find_all('script', attrs={"type": "", "src": ""}))
-            logger.exception(f"Unexpected <script> tag count: expected = 2, actual = {count}")
+        if len(bs.find_all("script", attrs={"type": "", "src": ""})) != 2:
+            count = len(bs.find_all("script", attrs={"type": "", "src": ""}))
+            logger.exception(
+                f"Unexpected <script> tag count: expected = 2, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        text = bs.find_all('script', attrs={"type": "", "src": ""})[-1]
+        text = bs.find_all("script", attrs={"type": "", "src": ""})[-1]
 
-        for item in str(text).strip().split(';'):
+        for item in str(text).strip().split(";"):
             line = item.strip()
 
             if not line:
@@ -185,18 +193,25 @@ def create_deckcards(deck_code):
                     name = match.group(2)
                     card_image_dict.update({number: name})
 
-        if len(bs.find_all(id='inputArea')) != 1:
-            count =len(bs.find_all(id='inputArea'))
-            logger.exception(f"Unexpected 'inputArea' id count: expected = 1, actual = {count}")
+        if len(bs.find_all(id="inputArea")) != 1:
+            count = len(bs.find_all(id="inputArea"))
+            logger.exception(
+                f"Unexpected 'inputArea' id count: expected = 1, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        bs_input_area = BeautifulSoup(str(bs.find_all(id='inputArea')[0]), "html.parser")
+        bs_input_area = BeautifulSoup(
+            str(bs.find_all(id="inputArea")[0]), "html.parser"
+        )
 
-        for item in bs_input_area.find_all('input'):
-            if item['value'] and item['id'] != "copyDeckID":
+        for item in bs_input_area.find_all("input"):
+            if item["value"] and item["id"] != "copyDeckID":
                 result = {
                     k: int(v)
-                    for k, v in (val.rsplit('_', 1)[0].split('_') for val in item['value'].split('-'))
+                    for k, v in (
+                        val.rsplit("_", 1)[0].split("_")
+                        for val in item["value"].split("-")
+                    )
                 }
                 card_count_dict.update(result)
 
@@ -206,15 +221,22 @@ def create_deckcards(deck_code):
             card_info = {
                 "id": int(card_id),
                 "name": str(name).replace("(ACE SPEC)", ""),
-                "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                "detail_url": str(
+                    "https://www.pokemon-card.com/card-search/details.php/card/"
+                    + str(card_id)
+                ),
+                "image_url": str(
+                    "https://www.pokemon-card.com" + str(card_image_dict[card_id])
+                ),
                 "count": card_count_dict[card_id],
             }
             deckcards.append(card_info)
             total_card_count += card_count_dict[card_id]
 
         if total_card_count != 60:
-            logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
+            logger.exception(
+                f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
         # 結果をキャッシュ
@@ -225,7 +247,6 @@ def create_deckcards(deck_code):
 
     except Exception:
         return JSONResponse(content={}, status_code=500)
-
 
 
 def create_deckcards_detail(deck_code):
@@ -248,7 +269,9 @@ def create_deckcards_detail(deck_code):
 
                 res.raise_for_status()
 
-                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+                logger.info(
+                    f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})"
+                )
 
             except requests.exceptions.Timeout:
                 logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
@@ -256,7 +279,9 @@ def create_deckcards_detail(deck_code):
 
             except requests.exceptions.HTTPError as e:
                 status = getattr(e.response, "status_code", 500)
-                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                logger.error(
+                    f"HTTPError: {fallback_url + deck_code} -> status {status}"
+                )
                 return JSONResponse(content={}, status_code=status)
 
             except requests.exceptions.ConnectionError as e:
@@ -264,13 +289,17 @@ def create_deckcards_detail(deck_code):
                 return JSONResponse(content={}, status_code=500)
 
             except requests.exceptions.RequestException as e:
-                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                logger.exception(
+                    f"Unexpected RequestException: {fallback_url + deck_code} -> {e}"
+                )
                 return JSONResponse(content={}, status_code=500)
 
         else:
             res.raise_for_status()
 
-            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(
+                f"Request succeeded: {url + deck_code} (status={res.status_code})"
+            )
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
@@ -289,22 +318,22 @@ def create_deckcards_detail(deck_code):
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
 
-
-
     try:
         bs = BeautifulSoup(res.text, "html.parser")
 
         card_name_dict = {}
         card_image_dict = {}
 
-        if len(bs.find_all('script', attrs={"type": "", "src": ""})) != 2:
-            count = len(bs.find_all('script', attrs={"type": "", "src": ""}))
-            logger.exception(f"Unexpected <script> tag count: expected = 2, actual = {count}")
+        if len(bs.find_all("script", attrs={"type": "", "src": ""})) != 2:
+            count = len(bs.find_all("script", attrs={"type": "", "src": ""}))
+            logger.exception(
+                f"Unexpected <script> tag count: expected = 2, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        text = bs.find_all('script', attrs={"type": "", "src": ""})[-1]
+        text = bs.find_all("script", attrs={"type": "", "src": ""})[-1]
 
-        for item in str(text).strip().split(';'):
+        for item in str(text).strip().split(";"):
             line = item.strip()
 
             if not line:
@@ -324,33 +353,40 @@ def create_deckcards_detail(deck_code):
                     name = match.group(2)
                     card_image_dict.update({number: name})
 
-        if len(bs.find_all(id='inputArea')) != 1:
-            count =len(bs.find_all(id='inputArea'))
-            logger.exception(f"Unexpected 'inputArea' id count: expected = 1, actual = {count}")
+        if len(bs.find_all(id="inputArea")) != 1:
+            count = len(bs.find_all(id="inputArea"))
+            logger.exception(
+                f"Unexpected 'inputArea' id count: expected = 1, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        bs_input_area = BeautifulSoup(str(bs.find_all(id='inputArea')[0]), "html.parser")
+        bs_input_area = BeautifulSoup(
+            str(bs.find_all(id="inputArea")[0]), "html.parser"
+        )
 
         ret_dict = {}
         total_card_count = 0
 
-        for item in bs_input_area.find_all('input'):
-            if item['id'] == "deck_ajs" or item['id'] == "copyDeckID":
+        for item in bs_input_area.find_all("input"):
+            if item["id"] == "deck_ajs" or item["id"] == "copyDeckID":
                 continue
 
             deckcards = []
             card_count_dict = {}
             card_type_count = 0
 
-            if item['value'] and item['id'] != "copyDeckID":
+            if item["value"] and item["id"] != "copyDeckID":
                 result = {
                     k: int(v)
-                    for k, v in (val.rsplit('_', 1)[0].split('_') for val in item['value'].split('-'))
+                    for k, v in (
+                        val.rsplit("_", 1)[0].split("_")
+                        for val in item["value"].split("-")
+                    )
                 }
                 card_count_dict.update(result)
 
             for card_id, count in card_count_dict.items():
-                if item['id'] == "deck_pke":
+                if item["id"] == "deck_pke":
                     with pool.connection() as conn:
                         with conn.cursor() as cur:
                             ability = ""
@@ -361,18 +397,25 @@ def create_deckcards_detail(deck_code):
                             row = cur.fetchone()
 
                             if row is None:
-                                logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                                logger.exception(
+                                    f"Record not found: pokemon_cards.id={card_id}"
+                                )
                                 return JSONResponse(content={}, status_code=500)
 
                             ability = row[0]
-                            attacks = row[1].split('/')
-
+                            attacks = row[1].split("/")
 
                     card_info = {
                         "id": int(card_id),
                         "name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
-                        "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                        "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                        "detail_url": str(
+                            "https://www.pokemon-card.com/card-search/details.php/card/"
+                            + str(card_id)
+                        ),
+                        "image_url": str(
+                            "https://www.pokemon-card.com"
+                            + str(card_image_dict[card_id])
+                        ),
                         "count": count,
                         "ability": ability,
                         "attacks": attacks,
@@ -384,26 +427,35 @@ def create_deckcards_detail(deck_code):
                     card_info = {
                         "id": int(card_id),
                         "name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
-                        "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                        "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                        "detail_url": str(
+                            "https://www.pokemon-card.com/card-search/details.php/card/"
+                            + str(card_id)
+                        ),
+                        "image_url": str(
+                            "https://www.pokemon-card.com"
+                            + str(card_image_dict[card_id])
+                        ),
                         "count": count,
                     }
 
                     deckcards.append(card_info)
                     card_type_count += count
 
-            ret_dict.update({item['id']: deckcards, item['id']+"_count": card_type_count})
+            ret_dict.update(
+                {item["id"]: deckcards, item["id"] + "_count": card_type_count}
+            )
             total_card_count += card_type_count
 
         if total_card_count != 60:
-            logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
+            logger.exception(
+                f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
         return ret_dict
 
     except Exception:
         return JSONResponse(content={}, status_code=500)
-
 
 
 def create_v1beta_deckcards(deck_code):
@@ -426,7 +478,9 @@ def create_v1beta_deckcards(deck_code):
 
                 res.raise_for_status()
 
-                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+                logger.info(
+                    f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})"
+                )
 
             except requests.exceptions.Timeout:
                 logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
@@ -434,7 +488,9 @@ def create_v1beta_deckcards(deck_code):
 
             except requests.exceptions.HTTPError as e:
                 status = getattr(e.response, "status_code", 500)
-                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                logger.error(
+                    f"HTTPError: {fallback_url + deck_code} -> status {status}"
+                )
                 return JSONResponse(content={}, status_code=status)
 
             except requests.exceptions.ConnectionError as e:
@@ -442,13 +498,17 @@ def create_v1beta_deckcards(deck_code):
                 return JSONResponse(content={}, status_code=500)
 
             except requests.exceptions.RequestException as e:
-                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                logger.exception(
+                    f"Unexpected RequestException: {fallback_url + deck_code} -> {e}"
+                )
                 return JSONResponse(content={}, status_code=500)
 
         else:
             res.raise_for_status()
 
-            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(
+                f"Request succeeded: {url + deck_code} (status={res.status_code})"
+            )
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
@@ -467,22 +527,22 @@ def create_v1beta_deckcards(deck_code):
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
 
-
-
     try:
         bs = BeautifulSoup(res.text, "html.parser")
 
         card_name_dict = {}
         card_image_dict = {}
 
-        if len(bs.find_all('script', attrs={"type": "", "src": ""})) != 2:
-            count = len(bs.find_all('script', attrs={"type": "", "src": ""}))
-            logger.exception(f"Unexpected <script> tag count: expected = 2, actual = {count}")
+        if len(bs.find_all("script", attrs={"type": "", "src": ""})) != 2:
+            count = len(bs.find_all("script", attrs={"type": "", "src": ""}))
+            logger.exception(
+                f"Unexpected <script> tag count: expected = 2, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        text = bs.find_all('script', attrs={"type": "", "src": ""})[-1]
+        text = bs.find_all("script", attrs={"type": "", "src": ""})[-1]
 
-        for item in str(text).strip().split(';'):
+        for item in str(text).strip().split(";"):
             line = item.strip()
 
             if not line:
@@ -502,33 +562,40 @@ def create_v1beta_deckcards(deck_code):
                     name = match.group(2)
                     card_image_dict.update({number: name})
 
-        if len(bs.find_all(id='inputArea')) != 1:
-            count =len(bs.find_all(id='inputArea'))
-            logger.exception(f"Unexpected 'inputArea' id count: expected = 1, actual = {count}")
+        if len(bs.find_all(id="inputArea")) != 1:
+            count = len(bs.find_all(id="inputArea"))
+            logger.exception(
+                f"Unexpected 'inputArea' id count: expected = 1, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        bs_input_area = BeautifulSoup(str(bs.find_all(id='inputArea')[0]), "html.parser")
+        bs_input_area = BeautifulSoup(
+            str(bs.find_all(id="inputArea")[0]), "html.parser"
+        )
 
         ret_list = []
         total_card_count = 0
 
-        for item in bs_input_area.find_all('input'):
-            if item['id'] == "deck_ajs" or item['id'] == "copyDeckID":
+        for item in bs_input_area.find_all("input"):
+            if item["id"] == "deck_ajs" or item["id"] == "copyDeckID":
                 continue
 
             deckcards = []
             card_count_dict = {}
             card_type_count = 0
 
-            if item['value'] and item['id'] != "copyDeckID":
+            if item["value"] and item["id"] != "copyDeckID":
                 result = {
                     k: int(v)
-                    for k, v in (val.rsplit('_', 1)[0].split('_') for val in item['value'].split('-'))
+                    for k, v in (
+                        val.rsplit("_", 1)[0].split("_")
+                        for val in item["value"].split("-")
+                    )
                 }
                 card_count_dict.update(result)
 
             for card_id, count in card_count_dict.items():
-                if item['id'] == "deck_pke":
+                if item["id"] == "deck_pke":
                     with pool.connection() as conn:
                         with conn.cursor() as cur:
                             ability = ""
@@ -539,18 +606,28 @@ def create_v1beta_deckcards(deck_code):
                             row = cur.fetchone()
 
                             if row is None:
-                                logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                                logger.exception(
+                                    f"Record not found: pokemon_cards.id={card_id}"
+                                )
                                 return JSONResponse(content={}, status_code=500)
 
                             ability = row[0]
-                            attacks = row[1].split('/')
+                            attacks = row[1].split("/")
 
                     card_info = {
                         "card_id": int(card_id),
-                        "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                        "card_name": str(card_name_dict[card_id]).replace(
+                            "(ACE SPEC)", ""
+                        ),
                         "card_count": count,
-                        "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                        "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                        "detail_url": str(
+                            "https://www.pokemon-card.com/card-search/details.php/card/"
+                            + str(card_id)
+                        ),
+                        "image_url": str(
+                            "https://www.pokemon-card.com"
+                            + str(card_image_dict[card_id])
+                        ),
                         "ability": ability,
                         "attacks": attacks,
                     }
@@ -560,10 +637,18 @@ def create_v1beta_deckcards(deck_code):
                 else:
                     card_info = {
                         "card_id": int(card_id),
-                        "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                        "card_name": str(card_name_dict[card_id]).replace(
+                            "(ACE SPEC)", ""
+                        ),
                         "card_count": count,
-                        "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                        "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                        "detail_url": str(
+                            "https://www.pokemon-card.com/card-search/details.php/card/"
+                            + str(card_id)
+                        ),
+                        "image_url": str(
+                            "https://www.pokemon-card.com"
+                            + str(card_image_dict[card_id])
+                        ),
                     }
 
                     deckcards.append(card_info)
@@ -573,7 +658,9 @@ def create_v1beta_deckcards(deck_code):
             total_card_count += card_type_count
 
         if total_card_count != 60:
-            logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
+            logger.exception(
+                f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
+            )
             return JSONResponse(content=[], status_code=500)
 
         return ret_list
@@ -602,7 +689,9 @@ def create_v1beta_deckcards_detail(deck_code):
 
                 res.raise_for_status()
 
-                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+                logger.info(
+                    f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})"
+                )
 
             except requests.exceptions.Timeout:
                 logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
@@ -610,7 +699,9 @@ def create_v1beta_deckcards_detail(deck_code):
 
             except requests.exceptions.HTTPError as e:
                 status = getattr(e.response, "status_code", 500)
-                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                logger.error(
+                    f"HTTPError: {fallback_url + deck_code} -> status {status}"
+                )
                 return JSONResponse(content={}, status_code=status)
 
             except requests.exceptions.ConnectionError as e:
@@ -618,13 +709,17 @@ def create_v1beta_deckcards_detail(deck_code):
                 return JSONResponse(content={}, status_code=500)
 
             except requests.exceptions.RequestException as e:
-                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                logger.exception(
+                    f"Unexpected RequestException: {fallback_url + deck_code} -> {e}"
+                )
                 return JSONResponse(content={}, status_code=500)
 
         else:
             res.raise_for_status()
 
-            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(
+                f"Request succeeded: {url + deck_code} (status={res.status_code})"
+            )
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
@@ -643,22 +738,22 @@ def create_v1beta_deckcards_detail(deck_code):
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
 
-
-
     try:
         bs = BeautifulSoup(res.text, "html.parser")
 
         card_name_dict = {}
         card_image_dict = {}
 
-        if len(bs.find_all('script', attrs={"type": "", "src": ""})) != 2:
-            count = len(bs.find_all('script', attrs={"type": "", "src": ""}))
-            logger.exception(f"Unexpected <script> tag count: expected = 2, actual = {count}")
+        if len(bs.find_all("script", attrs={"type": "", "src": ""})) != 2:
+            count = len(bs.find_all("script", attrs={"type": "", "src": ""}))
+            logger.exception(
+                f"Unexpected <script> tag count: expected = 2, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        text = bs.find_all('script', attrs={"type": "", "src": ""})[-1]
+        text = bs.find_all("script", attrs={"type": "", "src": ""})[-1]
 
-        for item in str(text).strip().split(';'):
+        for item in str(text).strip().split(";"):
             line = item.strip()
 
             if not line:
@@ -678,33 +773,40 @@ def create_v1beta_deckcards_detail(deck_code):
                     name = match.group(2)
                     card_image_dict.update({number: name})
 
-        if len(bs.find_all(id='inputArea')) != 1:
-            count =len(bs.find_all(id='inputArea'))
-            logger.exception(f"Unexpected 'inputArea' id count: expected = 1, actual = {count}")
+        if len(bs.find_all(id="inputArea")) != 1:
+            count = len(bs.find_all(id="inputArea"))
+            logger.exception(
+                f"Unexpected 'inputArea' id count: expected = 1, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        bs_input_area = BeautifulSoup(str(bs.find_all(id='inputArea')[0]), "html.parser")
+        bs_input_area = BeautifulSoup(
+            str(bs.find_all(id="inputArea")[0]), "html.parser"
+        )
 
         ret_dict = {}
         total_card_count = 0
 
-        for item in bs_input_area.find_all('input'):
-            if item['id'] == "deck_ajs" or item['id'] == "copyDeckID":
+        for item in bs_input_area.find_all("input"):
+            if item["id"] == "deck_ajs" or item["id"] == "copyDeckID":
                 continue
 
             deckcards = []
             card_count_dict = {}
             card_type_count = 0
 
-            if item['value'] and item['id'] != "copyDeckID":
+            if item["value"] and item["id"] != "copyDeckID":
                 result = {
                     k: int(v)
-                    for k, v in (val.rsplit('_', 1)[0].split('_') for val in item['value'].split('-'))
+                    for k, v in (
+                        val.rsplit("_", 1)[0].split("_")
+                        for val in item["value"].split("-")
+                    )
                 }
                 card_count_dict.update(result)
 
             for card_id, count in card_count_dict.items():
-                if item['id'] == "deck_pke":
+                if item["id"] == "deck_pke":
                     with pool.connection() as conn:
                         with conn.cursor() as cur:
                             ability = ""
@@ -715,18 +817,28 @@ def create_v1beta_deckcards_detail(deck_code):
                             row = cur.fetchone()
 
                             if row is None:
-                                logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                                logger.exception(
+                                    f"Record not found: pokemon_cards.id={card_id}"
+                                )
                                 return JSONResponse(content={}, status_code=500)
 
                             ability = row[0]
-                            attacks = row[1].split('/')
+                            attacks = row[1].split("/")
 
                     card_info = {
                         "card_id": int(card_id),
-                        "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                        "card_name": str(card_name_dict[card_id]).replace(
+                            "(ACE SPEC)", ""
+                        ),
                         "card_count": count,
-                        "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                        "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                        "detail_url": str(
+                            "https://www.pokemon-card.com/card-search/details.php/card/"
+                            + str(card_id)
+                        ),
+                        "image_url": str(
+                            "https://www.pokemon-card.com"
+                            + str(card_image_dict[card_id])
+                        ),
                         "ability": ability,
                         "attacks": attacks,
                     }
@@ -736,16 +848,29 @@ def create_v1beta_deckcards_detail(deck_code):
                 else:
                     card_info = {
                         "card_id": int(card_id),
-                        "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                        "card_name": str(card_name_dict[card_id]).replace(
+                            "(ACE SPEC)", ""
+                        ),
                         "card_count": count,
-                        "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                        "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                        "detail_url": str(
+                            "https://www.pokemon-card.com/card-search/details.php/card/"
+                            + str(card_id)
+                        ),
+                        "image_url": str(
+                            "https://www.pokemon-card.com"
+                            + str(card_image_dict[card_id])
+                        ),
                     }
 
                     deckcards.append(card_info)
                     card_type_count += count
 
-            ret_dict.update({str(item['id']).replace("deck", "card"): deckcards, str(item['id']).replace("deck", "card")+"_count": card_type_count})
+            ret_dict.update(
+                {
+                    str(item["id"]).replace("deck", "card"): deckcards,
+                    str(item["id"]).replace("deck", "card") + "_count": card_type_count,
+                }
+            )
             total_card_count += card_type_count
 
         for card_id, card_name in card_name_dict.items():
@@ -760,7 +885,9 @@ def create_v1beta_deckcards_detail(deck_code):
                 break
 
         if total_card_count != 60:
-            logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
+            logger.exception(
+                f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
         return ret_dict
@@ -789,7 +916,9 @@ def create_v1beta_deckcards_list(deck_code):
 
                 res.raise_for_status()
 
-                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+                logger.info(
+                    f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})"
+                )
 
             except requests.exceptions.Timeout:
                 logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
@@ -797,7 +926,9 @@ def create_v1beta_deckcards_list(deck_code):
 
             except requests.exceptions.HTTPError as e:
                 status = getattr(e.response, "status_code", 500)
-                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                logger.error(
+                    f"HTTPError: {fallback_url + deck_code} -> status {status}"
+                )
                 return JSONResponse(content={}, status_code=status)
 
             except requests.exceptions.ConnectionError as e:
@@ -805,13 +936,17 @@ def create_v1beta_deckcards_list(deck_code):
                 return JSONResponse(content={}, status_code=500)
 
             except requests.exceptions.RequestException as e:
-                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                logger.exception(
+                    f"Unexpected RequestException: {fallback_url + deck_code} -> {e}"
+                )
                 return JSONResponse(content={}, status_code=500)
 
         else:
             res.raise_for_status()
 
-            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(
+                f"Request succeeded: {url + deck_code} (status={res.status_code})"
+            )
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
@@ -830,22 +965,22 @@ def create_v1beta_deckcards_list(deck_code):
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
 
-
-
     try:
         bs = BeautifulSoup(res.text, "html.parser")
 
         card_name_dict = {}
         card_image_dict = {}
 
-        if len(bs.find_all('script', attrs={"type": "", "src": ""})) != 2:
-            count = len(bs.find_all('script', attrs={"type": "", "src": ""}))
-            logger.exception(f"Unexpected <script> tag count: expected = 2, actual = {count}")
+        if len(bs.find_all("script", attrs={"type": "", "src": ""})) != 2:
+            count = len(bs.find_all("script", attrs={"type": "", "src": ""}))
+            logger.exception(
+                f"Unexpected <script> tag count: expected = 2, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        text = bs.find_all('script', attrs={"type": "", "src": ""})[-1]
+        text = bs.find_all("script", attrs={"type": "", "src": ""})[-1]
 
-        for item in str(text).strip().split(';'):
+        for item in str(text).strip().split(";"):
             line = item.strip()
 
             if not line:
@@ -865,33 +1000,40 @@ def create_v1beta_deckcards_list(deck_code):
                     name = match.group(2)
                     card_image_dict.update({number: name})
 
-        if len(bs.find_all(id='inputArea')) != 1:
-            count =len(bs.find_all(id='inputArea'))
-            logger.exception(f"Unexpected 'inputArea' id count: expected = 1, actual = {count}")
+        if len(bs.find_all(id="inputArea")) != 1:
+            count = len(bs.find_all(id="inputArea"))
+            logger.exception(
+                f"Unexpected 'inputArea' id count: expected = 1, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        bs_input_area = BeautifulSoup(str(bs.find_all(id='inputArea')[0]), "html.parser")
+        bs_input_area = BeautifulSoup(
+            str(bs.find_all(id="inputArea")[0]), "html.parser"
+        )
 
         ret_list = []
         total_card_count = 0
 
-        for item in bs_input_area.find_all('input'):
-            if item['id'] == "deck_ajs" or item['id'] == "copyDeckID":
+        for item in bs_input_area.find_all("input"):
+            if item["id"] == "deck_ajs" or item["id"] == "copyDeckID":
                 continue
 
             deckcards = []
             card_count_dict = {}
             card_type_count = 0
 
-            if item['value'] and item['id'] != "copyDeckID":
+            if item["value"] and item["id"] != "copyDeckID":
                 result = {
                     k: int(v)
-                    for k, v in (val.rsplit('_', 1)[0].split('_') for val in item['value'].split('-'))
+                    for k, v in (
+                        val.rsplit("_", 1)[0].split("_")
+                        for val in item["value"].split("-")
+                    )
                 }
                 card_count_dict.update(result)
 
             for card_id, count in card_count_dict.items():
-                if item['id'] == "deck_pke":
+                if item["id"] == "deck_pke":
                     try:
                         with pool.connection() as conn:
                             with conn.cursor() as cur:
@@ -903,18 +1045,28 @@ def create_v1beta_deckcards_list(deck_code):
                                 row = cur.fetchone()
 
                                 if row is None:
-                                    logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                                    logger.exception(
+                                        f"Record not found: pokemon_cards.id={card_id}"
+                                    )
                                     return JSONResponse(content={}, status_code=500)
 
                                 ability = row[0]
-                                attacks = row[1].split('/')
+                                attacks = row[1].split("/")
 
                         for i in range(count):
                             card_info = {
                                 "card_id": int(card_id),
-                                "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
-                                "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                                "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                                "card_name": str(card_name_dict[card_id]).replace(
+                                    "(ACE SPEC)", ""
+                                ),
+                                "detail_url": str(
+                                    "https://www.pokemon-card.com/card-search/details.php/card/"
+                                    + str(card_id)
+                                ),
+                                "image_url": str(
+                                    "https://www.pokemon-card.com"
+                                    + str(card_image_dict[card_id])
+                                ),
                                 "ability": ability,
                                 "attacks": attacks,
                             }
@@ -922,7 +1074,9 @@ def create_v1beta_deckcards_list(deck_code):
                             deckcards.append(card_info)
                             card_type_count += 1
                     except psycopg.Error as e:
-                        logger.exception(f"PostgreSQL error occurred. card_id={card_id}")
+                        logger.exception(
+                            f"PostgreSQL error occurred. card_id={card_id}"
+                        )
                         logger.error("=== PostgreSQL Error ===")
                         logger.error(f"Message: {e}")
                         logger.error(f"SQLSTATE: {e.sqlstate}")
@@ -939,9 +1093,17 @@ def create_v1beta_deckcards_list(deck_code):
                     for i in range(count):
                         card_info = {
                             "card_id": int(card_id),
-                            "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
-                            "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                            "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                            "card_name": str(card_name_dict[card_id]).replace(
+                                "(ACE SPEC)", ""
+                            ),
+                            "detail_url": str(
+                                "https://www.pokemon-card.com/card-search/details.php/card/"
+                                + str(card_id)
+                            ),
+                            "image_url": str(
+                                "https://www.pokemon-card.com"
+                                + str(card_image_dict[card_id])
+                            ),
                         }
 
                         deckcards.append(card_info)
@@ -951,7 +1113,9 @@ def create_v1beta_deckcards_list(deck_code):
             total_card_count += card_type_count
 
         if total_card_count != 60:
-            logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
+            logger.exception(
+                f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
+            )
             return JSONResponse(content=[], status_code=500)
 
         # 結果をキャッシュ
@@ -984,7 +1148,9 @@ def create_v1beta_deckcards_summary(deck_code):
 
                 res.raise_for_status()
 
-                logger.info(f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})")
+                logger.info(
+                    f"Request succeeded: {fallback_url + deck_code} (status={res.status_code})"
+                )
 
             except requests.exceptions.Timeout:
                 logger.warning(f"Timeout occurred: {fallback_url + deck_code}")
@@ -992,7 +1158,9 @@ def create_v1beta_deckcards_summary(deck_code):
 
             except requests.exceptions.HTTPError as e:
                 status = getattr(e.response, "status_code", 500)
-                logger.error(f"HTTPError: {fallback_url + deck_code} -> status {status}")
+                logger.error(
+                    f"HTTPError: {fallback_url + deck_code} -> status {status}"
+                )
                 return JSONResponse(content={}, status_code=status)
 
             except requests.exceptions.ConnectionError as e:
@@ -1000,13 +1168,17 @@ def create_v1beta_deckcards_summary(deck_code):
                 return JSONResponse(content={}, status_code=500)
 
             except requests.exceptions.RequestException as e:
-                logger.exception(f"Unexpected RequestException: {fallback_url + deck_code} -> {e}")
+                logger.exception(
+                    f"Unexpected RequestException: {fallback_url + deck_code} -> {e}"
+                )
                 return JSONResponse(content={}, status_code=500)
 
         else:
             res.raise_for_status()
 
-            logger.info(f"Request succeeded: {url + deck_code} (status={res.status_code})")
+            logger.info(
+                f"Request succeeded: {url + deck_code} (status={res.status_code})"
+            )
 
     except requests.exceptions.Timeout:
         logger.warning(f"Timeout occurred: {url + deck_code}")
@@ -1025,22 +1197,22 @@ def create_v1beta_deckcards_summary(deck_code):
         logger.exception(f"Unexpected RequestException: {url + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
 
-
-
     try:
         bs = BeautifulSoup(res.text, "html.parser")
 
         card_name_dict = {}
         card_image_dict = {}
 
-        if len(bs.find_all('script', attrs={"type": "", "src": ""})) != 2:
-            count = len(bs.find_all('script', attrs={"type": "", "src": ""}))
-            logger.exception(f"Unexpected <script> tag count: expected = 2, actual = {count}")
+        if len(bs.find_all("script", attrs={"type": "", "src": ""})) != 2:
+            count = len(bs.find_all("script", attrs={"type": "", "src": ""}))
+            logger.exception(
+                f"Unexpected <script> tag count: expected = 2, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        text = bs.find_all('script', attrs={"type": "", "src": ""})[-1]
+        text = bs.find_all("script", attrs={"type": "", "src": ""})[-1]
 
-        for item in str(text).strip().split(';'):
+        for item in str(text).strip().split(";"):
             line = item.strip()
 
             if not line:
@@ -1060,33 +1232,40 @@ def create_v1beta_deckcards_summary(deck_code):
                     name = match.group(2)
                     card_image_dict.update({number: name})
 
-        if len(bs.find_all(id='inputArea')) != 1:
-            count =len(bs.find_all(id='inputArea'))
-            logger.exception(f"Unexpected 'inputArea' id count: expected = 1, actual = {count}")
+        if len(bs.find_all(id="inputArea")) != 1:
+            count = len(bs.find_all(id="inputArea"))
+            logger.exception(
+                f"Unexpected 'inputArea' id count: expected = 1, actual = {count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
-        bs_input_area = BeautifulSoup(str(bs.find_all(id='inputArea')[0]), "html.parser")
+        bs_input_area = BeautifulSoup(
+            str(bs.find_all(id="inputArea")[0]), "html.parser"
+        )
 
         ret_dict = {}
         total_card_count = 0
 
-        for item in bs_input_area.find_all('input'):
-            if item['id'] == "deck_ajs" or item['id'] == "copyDeckID":
+        for item in bs_input_area.find_all("input"):
+            if item["id"] == "deck_ajs" or item["id"] == "copyDeckID":
                 continue
 
             deckcards = []
             card_count_dict = {}
             card_type_count = 0
 
-            if item['value'] and item['id'] != "copyDeckID":
+            if item["value"] and item["id"] != "copyDeckID":
                 result = {
                     k: int(v)
-                    for k, v in (val.rsplit('_', 1)[0].split('_') for val in item['value'].split('-'))
+                    for k, v in (
+                        val.rsplit("_", 1)[0].split("_")
+                        for val in item["value"].split("-")
+                    )
                 }
                 card_count_dict.update(result)
 
             for card_id, count in card_count_dict.items():
-                if item['id'] == "deck_pke":
+                if item["id"] == "deck_pke":
                     with pool.connection() as conn:
                         with conn.cursor() as cur:
                             ability = ""
@@ -1097,18 +1276,28 @@ def create_v1beta_deckcards_summary(deck_code):
                             row = cur.fetchone()
 
                             if row is None:
-                                logger.exception(f"Record not found: pokemon_cards.id={card_id}")
+                                logger.exception(
+                                    f"Record not found: pokemon_cards.id={card_id}"
+                                )
                                 return JSONResponse(content={}, status_code=500)
 
                             ability = row[0]
-                            attacks = row[1].split('/')
+                            attacks = row[1].split("/")
 
                     card_info = {
                         "card_id": int(card_id),
-                        "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                        "card_name": str(card_name_dict[card_id]).replace(
+                            "(ACE SPEC)", ""
+                        ),
                         "card_count": count,
-                        "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                        "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                        "detail_url": str(
+                            "https://www.pokemon-card.com/card-search/details.php/card/"
+                            + str(card_id)
+                        ),
+                        "image_url": str(
+                            "https://www.pokemon-card.com"
+                            + str(card_image_dict[card_id])
+                        ),
                         "ability": ability,
                         "attacks": attacks,
                     }
@@ -1118,23 +1307,31 @@ def create_v1beta_deckcards_summary(deck_code):
                 else:
                     card_info = {
                         "card_id": int(card_id),
-                        "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                        "card_name": str(card_name_dict[card_id]).replace(
+                            "(ACE SPEC)", ""
+                        ),
                         "card_count": count,
-                        "detail_url": str("https://www.pokemon-card.com/card-search/details.php/card/" + str(card_id)),
-                        "image_url": str("https://www.pokemon-card.com" + str(card_image_dict[card_id])),
+                        "detail_url": str(
+                            "https://www.pokemon-card.com/card-search/details.php/card/"
+                            + str(card_id)
+                        ),
+                        "image_url": str(
+                            "https://www.pokemon-card.com"
+                            + str(card_image_dict[card_id])
+                        ),
                     }
 
                     deckcards.append(card_info)
                     card_type_count += count
 
-            if item['id'] == "deck_pke":
+            if item["id"] == "deck_pke":
                 result = OrderedDict()
 
                 for card in deckcards:
                     key = (
                         card.get("card_name"),
                         card.get("ability", ""),
-                        tuple(sorted(card.get("attacks", [])))  # attacksは順不同
+                        tuple(sorted(card.get("attacks", []))),  # attacksは順不同
                     )
 
                     if key not in result:
@@ -1152,12 +1349,18 @@ def create_v1beta_deckcards_summary(deck_code):
                     else:
                         result[key]["card_count"] += card["card_count"]
 
-
-            ret_dict.update({str(item['id']).replace("deck", "card"): list(result.values()), str(item['id']).replace("deck", "card")+"_count": card_type_count})
+            ret_dict.update(
+                {
+                    str(item["id"]).replace("deck", "card"): list(result.values()),
+                    str(item["id"]).replace("deck", "card") + "_count": card_type_count,
+                }
+            )
             total_card_count += card_type_count
 
         if total_card_count != 60:
-            logger.exception(f"Unexpected deck cards count: expected = 60, actual = {total_card_count}")
+            logger.exception(
+                f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
+            )
             return JSONResponse(content={}, status_code=500)
 
         # 結果をキャッシュ
@@ -1182,7 +1385,7 @@ def find_acespec(deck_code):
                 del card["count"]
                 return card
 
-        return JSONResponse(status_code=204)
+        return JSONResponse(content={}, status_code=204)
     except Exception:
         return JSONResponse(content={}, status_code=500)
 
@@ -1205,10 +1408,9 @@ def create_v1beta_acespec(deck_code):
 
                 return card
 
-        return JSONResponse(status_code=204)
+        return JSONResponse(content={}, status_code=204)
     except Exception:
         return JSONResponse(content={}, status_code=500)
-
 
 
 load_dotenv()
@@ -1218,7 +1420,9 @@ port = os.getenv("DB_PORT")
 user = os.getenv("DB_USER_NAME")
 password = os.getenv("DB_USER_PASSWORD")
 dbname = os.getenv("DB_NAME")
-dsn = "host={} port={} user={} password={} dbname={} sslmode=disable".format(host, port, user, password, dbname)
+dsn = "host={} port={} user={} password={} dbname={} sslmode=disable".format(
+    host, port, user, password, dbname
+)
 
 pool = ConnectionPool(
     conninfo=dsn,
@@ -1245,21 +1449,22 @@ def create_deckcards_app(deck_code):
     else:
         logger.info(f"[deckcards] cache miss deck_code={deck_code}")
         return create_deckcards(deck_code)
-    
+
 
 @app.get("/deckcards/{deck_code}/acespec")
 def find_acespec_app(deck_code):
     return find_acespec(deck_code)
+
 
 @app.get("/deckcards/{deck_code}/detail")
 def create_deckcards_detail_app(deck_code):
     return create_deckcards_detail(deck_code)
 
 
-
 @app.get("/api/v1beta/deckcards/{deck_code}")
 def create_v1beta_deckcards_app(deck_code):
     return create_v1beta_deckcards(deck_code)
+
 
 @app.get("/api/v1beta/deckcards/{deck_code}/acespec")
 def create_v1beta_deckcards_acespec_app(deck_code):
@@ -1270,9 +1475,11 @@ def create_v1beta_deckcards_acespec_app(deck_code):
         logger.info(f"[acespec] cache miss deck_code={deck_code}")
         return create_v1beta_acespec(deck_code)
 
+
 @app.get("/api/v1beta/deckcards/{deck_code}/detail")
 def create_v1beta_deckcards_detail_app(deck_code):
     return create_v1beta_deckcards_detail(deck_code)
+
 
 @app.get("/api/v1beta/deckcards/{deck_code}/list")
 def create_v1beta_deckcards_list_app(deck_code):
@@ -1283,6 +1490,7 @@ def create_v1beta_deckcards_list_app(deck_code):
         logger.info(f"[deckcards/list] cache miss deck_code={deck_code}")
         return create_v1beta_deckcards_list(deck_code)
 
+
 @app.get("/api/v1beta/deckcards/{deck_code}/summary")
 def create_v1beta_deckcards_summary_app(deck_code):
     if deck_code in deck_summary_cache:
@@ -1291,7 +1499,6 @@ def create_v1beta_deckcards_summary_app(deck_code):
     else:
         logger.info(f"[deckcards/summary] cache miss deck_code={deck_code}")
         return create_v1beta_deckcards_summary(deck_code)
-
 
 
 @app.get("/health")
