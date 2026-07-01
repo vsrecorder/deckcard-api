@@ -6,15 +6,22 @@ install:
 
 .PHONY: run
 run: install
-	poetry run python main.py
+	poetry run gunicorn main:app \
+	-k uvicorn.workers.UvicornWorker \
+	-w 1 \
+	-b 0.0.0.0:8080 \
+	--timeout 60
 
 .PHONY: image
 image:
-	docker build -t vsrecorder/deckcard-api:latest . && docker push vsrecorder/deckcard-api:latest
+	docker build -t vsrecorder/deckcard-api:local .
+	docker push     vsrecorder/deckcard-api:local
 
 .PHONY: deploy
 deploy:
-	docker compose pull && docker compose down && docker compose up -d
+	git pull
+	docker compose pull
+	docker compose up -d --no-deps --wait deckcard-api
 
 .PHONY: restart
 restart:
