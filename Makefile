@@ -14,8 +14,8 @@ run: install
 
 .PHONY: image
 image:
-	docker build -t vsrecorder/deckcard-api:latest .
-	docker push     vsrecorder/deckcard-api:latest
+	docker build . -t vsrecorder/deckcard-api:latest
+	docker push       vsrecorder/deckcard-api:latest
 
 .PHONY: deploy
 deploy:
@@ -25,7 +25,8 @@ deploy:
 
 .PHONY: restart
 restart:
-	docker compose down && docker compose up -d
+	docker compose down
+	docker compose up -d
 
 .PHONY: up
 up:

@@ -1,7 +1,7 @@
 services:
   deckcard-api:
     image: vsrecorder/deckcard-api:latest
-    restart: always
+    restart: unless-stopped
     network_mode: "host"
     ports:
       - "8080:8080"
