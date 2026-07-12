@@ -12,8 +12,12 @@ run: install
 	-b 0.0.0.0:8080 \
 	--timeout 60
 
-.PHONY: image
-image:
+.PHONY: image-local
+image-local:
+	docker build . -t vsrecorder/deckcard-api:local
+
+.PHONY: image-prod
+image-prod:
 	docker build . -t vsrecorder/deckcard-api:latest
 	docker push       vsrecorder/deckcard-api:latest
 
