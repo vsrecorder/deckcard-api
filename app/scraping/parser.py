@@ -1,5 +1,6 @@
 """デッキ結果ページのHTMLパース"""
 
+import html
 import logging
 import re
 
@@ -9,8 +10,30 @@ from app.core.errors import DeckError
 
 logger = logging.getLogger(__name__)
 
-# script内の `[番号]='値'` を抽出する正規表現
-_ITEM_PATTERN = re.compile(r"\[(\d+)\]='([^']+)'")
+
+def _item_pattern(key):
+    """script内の `PCGDECK.<key>[番号]='値'` を抽出する正規表現を生成する。
+
+    値はJS文字列リテラルなので、``\\'`` によるエスケープを考慮して
+    エスケープされていない ``'`` までを1つの値として取り出す。
+    """
+    return re.compile(rf"{key}\[(\d+)\]\s*=\s*'((?:[^'\\]|\\.)*)'")
+
+
+_NAME_PATTERN = _item_pattern("searchItemNameAlt")
+_IMAGE_PATTERN = _item_pattern("searchItemCardPict")
+
+
+def _unescape(value):
+    """script内の値からJSエスケープとHTMLエンティティを解除する。
+
+    カード名は ``ゲンガー&amp;ミミッキュGX`` のようにHTMLエンティティ化されて
+    埋め込まれているため、``&`` などへ復元する必要がある。
+    """
+    # JSのバックスラッシュエスケープ（\' など）を解除する
+    value = re.sub(r"\\(.)", r"\1", value)
+
+    return html.unescape(value)
 
 
 def parse_card_dicts(bs):
@@ -29,26 +52,16 @@ def parse_card_dicts(bs):
         )
         raise DeckError()
 
-    text = scripts[-1]
+    text = str(scripts[-1])
 
-    card_name_dict = {}
-    card_image_dict = {}
-
-    for item in str(text).strip().split(";"):
-        line = item.strip()
-
-        if not line:
-            continue
-
-        if "searchItemNameAlt" in line:
-            match = _ITEM_PATTERN.search(line)
-            if match:
-                card_name_dict[match.group(1)] = match.group(2)
-
-        if "searchItemCardPict" in line:
-            match = _ITEM_PATTERN.search(line)
-            if match:
-                card_image_dict[match.group(1)] = match.group(2)
+    # `;` で分割してから走査すると、カード名に含まれるHTMLエンティティ（`&amp;`）の
+    # 末尾の `;` で値が途切れてしまうため、script全体に対して直接マッチさせる
+    card_name_dict = {
+        card_id: _unescape(value) for card_id, value in _NAME_PATTERN.findall(text)
+    }
+    card_image_dict = {
+        card_id: _unescape(value) for card_id, value in _IMAGE_PATTERN.findall(text)
+    }
 
     return card_name_dict, card_image_dict
 
