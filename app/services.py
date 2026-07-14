@@ -8,7 +8,7 @@ import logging
 
 import psycopg
 from bs4 import BeautifulSoup
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 
 from app.core.cache import (
     acespec_cache,
@@ -16,8 +16,8 @@ from app.core.cache import (
     deck_summary_cache,
     deckcards_cache,
 )
-from app.core.constants import acespecs, card_detail_url, card_image_url
-from app.core.db import fetch_pokemon_cards
+from app.core.constants import card_detail_url, card_image_url, strip_acespec
+from app.core.db import fetch_acespec_ids, fetch_pokemon_cards
 from app.core.errors import DeckError
 from app.scraping.fetcher import fetch_deck_html
 from app.scraping.parser import get_input_area, parse_card_counts, parse_card_dicts
@@ -40,7 +40,10 @@ def create_deckcards(deck_code):
 
         card_count_dict = {}
         for item in bs_input_area.find_all("input"):
-            if item["value"] and item["id"] != "copyDeckID":
+            if item["id"] in _SKIP_INPUT_IDS:
+                continue
+
+            if item["value"]:
                 card_count_dict.update(parse_card_counts(item["value"]))
 
         deckcards = []
@@ -50,7 +53,7 @@ def create_deckcards(deck_code):
             deckcards.append(
                 {
                     "id": int(card_id),
-                    "name": str(name).replace("(ACE SPEC)", ""),
+                    "name": strip_acespec(name),
                     "detail_url": card_detail_url(card_id),
                     "image_url": card_image_url(card_image_dict[card_id]),
                     "count": card_count_dict[card_id],
@@ -59,7 +62,7 @@ def create_deckcards(deck_code):
             total_card_count += card_count_dict[card_id]
 
         if total_card_count != 60:
-            logger.exception(
+            logger.error(
                 f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
             )
             return JSONResponse(content={}, status_code=500)
@@ -110,7 +113,7 @@ def create_deckcards_detail(deck_code):
             for card_id, count in card_count_dict.items():
                 card_info = {
                     "id": int(card_id),
-                    "name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                    "name": strip_acespec(card_name_dict[card_id]),
                     "detail_url": card_detail_url(card_id),
                     "image_url": card_image_url(card_image_dict[card_id]),
                     "count": count,
@@ -130,7 +133,7 @@ def create_deckcards_detail(deck_code):
             total_card_count += card_type_count
 
         if total_card_count != 60:
-            logger.exception(
+            logger.error(
                 f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
             )
             return JSONResponse(content={}, status_code=500)
@@ -177,7 +180,7 @@ def create_v1beta_deckcards(deck_code):
             for card_id, count in card_count_dict.items():
                 card_info = {
                     "card_id": int(card_id),
-                    "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                    "card_name": strip_acespec(card_name_dict[card_id]),
                     "card_count": count,
                     "detail_url": card_detail_url(card_id),
                     "image_url": card_image_url(card_image_dict[card_id]),
@@ -195,7 +198,7 @@ def create_v1beta_deckcards(deck_code):
             total_card_count += card_type_count
 
         if total_card_count != 60:
-            logger.exception(
+            logger.error(
                 f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
             )
             return JSONResponse(content=[], status_code=500)
@@ -242,7 +245,7 @@ def create_v1beta_deckcards_detail(deck_code):
             for card_id, count in card_count_dict.items():
                 card_info = {
                     "card_id": int(card_id),
-                    "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                    "card_name": strip_acespec(card_name_dict[card_id]),
                     "card_count": count,
                     "detail_url": card_detail_url(card_id),
                     "image_url": card_image_url(card_image_dict[card_id]),
@@ -260,21 +263,23 @@ def create_v1beta_deckcards_detail(deck_code):
             ret_dict.update({key: deckcards, key + "_count": card_type_count})
             total_card_count += card_type_count
 
+        # ページ側のカード名には目印が付かないことがあるため、IDで判定する
+        acespec_ids = fetch_acespec_ids()
+
         for card_id, card_name in card_name_dict.items():
-            if card_name in acespecs:
-                card_name = card_name.replace("(ACE SPEC)", "")
+            if int(card_id) in acespec_ids:
                 ret_dict.update(
                     {
                         "card_acespec": {
                             "card_id": int(card_id),
-                            "card_name": str(card_name),
+                            "card_name": strip_acespec(card_name),
                         }
                     }
                 )
                 break
 
         if total_card_count != 60:
-            logger.exception(
+            logger.error(
                 f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
             )
             return JSONResponse(content={}, status_code=500)
@@ -340,8 +345,8 @@ def create_v1beta_deckcards_list(deck_code):
                         deckcards.append(
                             {
                                 "card_id": int(card_id),
-                                "card_name": str(card_name_dict[card_id]).replace(
-                                    "(ACE SPEC)", ""
+                                "card_name": strip_acespec(
+                                    card_name_dict[card_id]
                                 ),
                                 "detail_url": card_detail_url(card_id),
                                 "image_url": card_image_url(card_image_dict[card_id]),
@@ -355,8 +360,8 @@ def create_v1beta_deckcards_list(deck_code):
                         deckcards.append(
                             {
                                 "card_id": int(card_id),
-                                "card_name": str(card_name_dict[card_id]).replace(
-                                    "(ACE SPEC)", ""
+                                "card_name": strip_acespec(
+                                    card_name_dict[card_id]
                                 ),
                                 "detail_url": card_detail_url(card_id),
                                 "image_url": card_image_url(card_image_dict[card_id]),
@@ -368,7 +373,7 @@ def create_v1beta_deckcards_list(deck_code):
             total_card_count += card_type_count
 
         if total_card_count != 60:
-            logger.exception(
+            logger.error(
                 f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
             )
             return JSONResponse(content=[], status_code=500)
@@ -419,7 +424,7 @@ def create_v1beta_deckcards_summary(deck_code):
             for card_id, count in card_count_dict.items():
                 card_info = {
                     "card_id": int(card_id),
-                    "card_name": str(card_name_dict[card_id]).replace("(ACE SPEC)", ""),
+                    "card_name": strip_acespec(card_name_dict[card_id]),
                     "card_count": count,
                     "detail_url": card_detail_url(card_id),
                     "image_url": card_image_url(card_image_dict[card_id]),
@@ -457,7 +462,7 @@ def create_v1beta_deckcards_summary(deck_code):
             total_card_count += card_type_count
 
         if total_card_count != 60:
-            logger.exception(
+            logger.error(
                 f"Unexpected deck cards count: expected = 60, actual = {total_card_count}"
             )
             return JSONResponse(content={}, status_code=500)
@@ -474,42 +479,76 @@ def create_v1beta_deckcards_summary(deck_code):
         return JSONResponse(content={}, status_code=500)
 
 
+def _extract_acespec(deck_code, id_key, name_key):
+    """デッキ結果ページからACE SPECカードを1枚探す。
+
+    ページ側のカード名は目印が当てにならないため、cardsマスタ由来のIDの集合で判定する。
+
+    Args:
+        id_key, name_key: 返す辞書のキー名。APIのバージョンによって異なる。
+    Returns:
+        dict: ACE SPECカードの情報。
+        None: デッキにACE SPECが入っていない場合。
+        JSONResponse: ページの取得に失敗した場合。
+    """
+    res = fetch_deck_html(deck_code)
+    if isinstance(res, JSONResponse):
+        return res
+
+    bs = BeautifulSoup(res.text, "html.parser")
+    card_name_dict, card_image_dict = parse_card_dicts(bs)
+
+    acespec_ids = fetch_acespec_ids()
+
+    for card_id, card_name in card_name_dict.items():
+        if int(card_id) in acespec_ids:
+            return {
+                id_key: int(card_id),
+                name_key: strip_acespec(card_name),
+                "detail_url": card_detail_url(card_id),
+                "image_url": card_image_url(card_image_dict[card_id]),
+            }
+
+    return None
+
+
 def find_acespec(deck_code):
     try:
-        deckcards = create_deckcards(deck_code)
+        acespec = _extract_acespec(deck_code, "id", "name")
 
-        if isinstance(deckcards, JSONResponse):
-            return deckcards
+        if isinstance(acespec, JSONResponse):
+            return acespec
 
-        for card in deckcards:
-            if card["name"] in acespecs:
-                card["name"] = card["name"].replace("(ACE SPEC)", "")
-                del card["count"]
-                return card
+        if acespec is None:
+            # 204 No Content はボディを持てないため、空ボディのResponseを返す
+            return Response(status_code=204)
 
-        return JSONResponse(content={}, status_code=204)
+        return acespec
+
+    except DeckError as e:
+        return JSONResponse(content=e.content, status_code=e.status_code)
     except Exception:
         return JSONResponse(content={}, status_code=500)
 
 
 def create_v1beta_acespec(deck_code):
     try:
-        deckcards = create_v1beta_deckcards(deck_code)
+        acespec = _extract_acespec(deck_code, "card_id", "card_name")
 
-        if isinstance(deckcards, JSONResponse):
-            return deckcards
+        if isinstance(acespec, JSONResponse):
+            return acespec
 
-        for card in deckcards:
-            if card["card_name"] in acespecs:
-                card["card_name"] = card["card_name"].replace("(ACE SPEC)", "")
-                del card["card_count"]
+        if acespec is None:
+            # 204 No Content はボディを持てないため、空ボディのResponseを返す
+            return Response(status_code=204)
 
-                # 結果をキャッシュ
-                acespec_cache[deck_code] = card
-                logger.info(f"[acespec] cache store deck_code={deck_code}")
+        # 結果をキャッシュ
+        acespec_cache[deck_code] = acespec
+        logger.info(f"[acespec] cache store deck_code={deck_code}")
 
-                return card
+        return acespec
 
-        return JSONResponse(content={}, status_code=204)
+    except DeckError as e:
+        return JSONResponse(content=e.content, status_code=e.status_code)
     except Exception:
         return JSONResponse(content={}, status_code=500)

@@ -36,9 +36,11 @@ app = FastAPI()
 
 @app.get("/deckcards/{deck_code}")
 def create_deckcards_app(deck_code):
-    if deck_code in deckcards_cache:
+    cached = deckcards_cache.get(deck_code)
+
+    if cached is not None:
         logger.info(f"[deckcards] cache hit deck_code={deck_code}")
-        return deckcards_cache[deck_code]
+        return cached
     else:
         logger.info(f"[deckcards] cache miss deck_code={deck_code}")
         return create_deckcards(deck_code)
@@ -61,9 +63,11 @@ def create_v1beta_deckcards_app(deck_code):
 
 @app.get("/api/v1beta/deckcards/{deck_code}/acespec")
 def create_v1beta_deckcards_acespec_app(deck_code):
-    if deck_code in acespec_cache:
+    cached = acespec_cache.get(deck_code)
+
+    if cached is not None:
         logger.info(f"[acespec] cache hit deck_code={deck_code}")
-        return acespec_cache[deck_code]
+        return cached
     else:
         logger.info(f"[acespec] cache miss deck_code={deck_code}")
         return create_v1beta_acespec(deck_code)
@@ -76,9 +80,11 @@ def create_v1beta_deckcards_detail_app(deck_code):
 
 @app.get("/api/v1beta/deckcards/{deck_code}/list")
 def create_v1beta_deckcards_list_app(deck_code):
-    if deck_code in deck_list_cache:
+    cached = deck_list_cache.get(deck_code)
+
+    if cached is not None:
         logger.info(f"[deckcards/list] cache hit deck_code={deck_code}")
-        return deck_list_cache[deck_code]
+        return cached
     else:
         logger.info(f"[deckcards/list] cache miss deck_code={deck_code}")
         return create_v1beta_deckcards_list(deck_code)
@@ -86,9 +92,11 @@ def create_v1beta_deckcards_list_app(deck_code):
 
 @app.get("/api/v1beta/deckcards/{deck_code}/summary")
 def create_v1beta_deckcards_summary_app(deck_code):
-    if deck_code in deck_summary_cache:
+    cached = deck_summary_cache.get(deck_code)
+
+    if cached is not None:
         logger.info(f"[deckcards/summary] cache hit deck_code={deck_code}")
-        return deck_summary_cache[deck_code]
+        return cached
     else:
         logger.info(f"[deckcards/summary] cache miss deck_code={deck_code}")
         return create_v1beta_deckcards_summary(deck_code)

@@ -47,7 +47,7 @@ def parse_card_dicts(bs):
     scripts = bs.find_all("script", attrs={"type": "", "src": ""})
 
     if len(scripts) != 2:
-        logger.exception(
+        logger.error(
             f"Unexpected <script> tag count: expected = 2, actual = {len(scripts)}"
         )
         raise DeckError()
@@ -75,7 +75,7 @@ def get_input_area(bs):
     areas = bs.find_all(id="inputArea")
 
     if len(areas) != 1:
-        logger.exception(
+        logger.error(
             f"Unexpected 'inputArea' id count: expected = 1, actual = {len(areas)}"
         )
         raise DeckError()

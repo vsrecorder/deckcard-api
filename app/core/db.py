@@ -6,7 +6,8 @@ import os
 from dotenv import load_dotenv
 from psycopg_pool import ConnectionPool
 
-from app.core.cache import pokemon_card_cache
+from app.core.cache import acespec_ids_cache, pokemon_card_cache
+from app.core.constants import ACESPEC_SUFFIX
 from app.core.errors import DeckError
 
 logger = logging.getLogger(__name__)
@@ -75,7 +76,7 @@ def fetch_pokemon_cards(card_ids):
     # 取得できなかったIDがあれば従来と同じく500として扱う
     not_found = [card_id for card_id in ids if card_id not in result]
     if not_found:
-        logger.exception(f"Record not found: pokemon_cards.id={not_found}")
+        logger.error(f"Record not found: pokemon_cards.id={not_found}")
         raise DeckError()
 
     return result
@@ -92,3 +93,35 @@ def fetch_pokemon_card(card_id):
         DeckError: レコードが見つからない場合（500）。
     """
     return fetch_pokemon_cards([card_id])[int(card_id)]
+
+
+# 集合ひとつしか持たないので、キャッシュのキーは固定で構わない
+_ACESPEC_IDS_CACHE_KEY = "acespec_ids"
+
+
+def fetch_acespec_ids():
+    """ACE SPECカードのIDの集合をcardsテーブルから取得する。
+
+    デッキ結果ページ側のカード名は、ACE SPECでも "(ACE SPEC)" の目印が付かないこと
+    がある（例: リッチエネルギー）。一方cardsテーブルのカード名には必ず付いているため、
+    判定はマスタ側を情報源とする。
+
+    ほぼ不変のデータなので、結果はTTL付きでキャッシュして毎回のクエリを避ける。
+
+    Returns:
+        set[int]: ACE SPECカードのIDの集合。
+    """
+    cached = acespec_ids_cache.get(_ACESPEC_IDS_CACHE_KEY)
+    if cached is not None:
+        return cached
+
+    with pool.connection() as conn:
+        with conn.cursor() as cur:
+            sql = "SELECT id FROM cards WHERE card_name LIKE %s"
+            cur.execute(sql, (f"%{ACESPEC_SUFFIX}%",))
+            acespec_ids = {row[0] for row in cur.fetchall()}
+
+    acespec_ids_cache[_ACESPEC_IDS_CACHE_KEY] = acespec_ids
+    logger.info(f"[acespec_ids] cache store count={len(acespec_ids)}")
+
+    return acespec_ids
