@@ -10,19 +10,16 @@ from fastapi.responses import JSONResponse
 
 from app.core.cache import (
     acespec_cache,
+    deck_detail_cache,
     deck_list_cache,
     deck_summary_cache,
-    deckcards_cache,
 )
 from app.services import (
-    create_deckcards,
-    create_deckcards_detail,
     create_v1beta_acespec,
     create_v1beta_deckcards,
     create_v1beta_deckcards_detail,
     create_v1beta_deckcards_list,
     create_v1beta_deckcards_summary,
-    find_acespec,
 )
 
 logging.basicConfig(
@@ -32,28 +29,6 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
-
-
-@app.get("/deckcards/{deck_code}")
-def create_deckcards_app(deck_code):
-    cached = deckcards_cache.get(deck_code)
-
-    if cached is not None:
-        logger.info(f"[deckcards] cache hit deck_code={deck_code}")
-        return cached
-    else:
-        logger.info(f"[deckcards] cache miss deck_code={deck_code}")
-        return create_deckcards(deck_code)
-
-
-@app.get("/deckcards/{deck_code}/acespec")
-def find_acespec_app(deck_code):
-    return find_acespec(deck_code)
-
-
-@app.get("/deckcards/{deck_code}/detail")
-def create_deckcards_detail_app(deck_code):
-    return create_deckcards_detail(deck_code)
 
 
 @app.get("/api/v1beta/deckcards/{deck_code}")
@@ -75,7 +50,14 @@ def create_v1beta_deckcards_acespec_app(deck_code):
 
 @app.get("/api/v1beta/deckcards/{deck_code}/detail")
 def create_v1beta_deckcards_detail_app(deck_code):
-    return create_v1beta_deckcards_detail(deck_code)
+    cached = deck_detail_cache.get(deck_code)
+
+    if cached is not None:
+        logger.info(f"[deckcards/detail] cache hit deck_code={deck_code}")
+        return cached
+    else:
+        logger.info(f"[deckcards/detail] cache miss deck_code={deck_code}")
+        return create_v1beta_deckcards_detail(deck_code)
 
 
 @app.get("/api/v1beta/deckcards/{deck_code}/list")

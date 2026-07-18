@@ -25,13 +25,7 @@
 
 `{deck_code}` にデッキコードを指定します。
 
-### 旧形式
-
-| メソッド | パス | 内容 |
-| --- | --- | --- |
-| GET | `/deckcards/{deck_code}` | デッキ内カードの一覧（フラットな配列） |
-| GET | `/deckcards/{deck_code}/acespec` | デッキに含まれる ACE SPEC カードを1枚返す |
-| GET | `/deckcards/{deck_code}/detail` | ポケモン/グッズ/エネルギー等の種別ごとにカードを分類し、特性・ワザ付きで返す |
+> **旧形式（`/deckcards/*`、公開パス `/api/v1/deckcards/*`）は廃止しました。** 以下の v1beta 形式へ移行してください。
 
 ### v1beta 形式
 

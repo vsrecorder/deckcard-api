@@ -37,11 +37,11 @@ class ThreadSafeCache:
             return len(self._cache)
 
 
-deckcards_cache = ThreadSafeCache(cachetools.LRUCache(maxsize=2000))
 acespec_cache = ThreadSafeCache(cachetools.LRUCache(maxsize=2000))
 
 deck_list_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=2000))
 deck_summary_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=2000))
+deck_detail_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=2000))
 
 # pokemon_cardsマスタ（card_id -> (ability, attacks)）のキャッシュ。
 # ほぼ不変のマスタデータだが、更新反映のため24時間のTTLを設ける。
