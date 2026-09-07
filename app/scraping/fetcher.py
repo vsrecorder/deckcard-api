@@ -31,10 +31,26 @@ _retry = Retry(
 )
 
 
+# コネクションプールの本数。
+#
+# 未指定だと urllib3 の既定(10)になる。webapp のシティリーグ結果ページは1ページぶんの
+# デッキコードをまとめて引きに来るため、この API には同時に十数本が届く。プールが尽きると
+# urllib3 は「Connection pool is full」を出し、あぶれた接続は再利用されずに毎回
+# TLS ハンドシェイクからやり直しになる(本番ログでも実際に発生していた)。
+#
+# ワーカーごとに1つの Session を共有するので、gunicorn のワーカー数ではなく
+# 「1ワーカーが同時に抱えうる本数」で決める。呼び出し側の同時実行数(16)に余裕を持たせた値。
+POOL_SIZE = 32
+
+
 def _build_session():
     """リトライ設定を適用した requests.Session を生成する。"""
     session = requests.Session()
-    adapter = HTTPAdapter(max_retries=_retry)
+    adapter = HTTPAdapter(
+        max_retries=_retry,
+        pool_connections=POOL_SIZE,
+        pool_maxsize=POOL_SIZE,
+    )
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     return session

@@ -37,11 +37,27 @@ class ThreadSafeCache:
             return len(self._cache)
 
 
-acespec_cache = ThreadSafeCache(cachetools.LRUCache(maxsize=2000))
+# エンドポイントごとのレスポンスキャッシュ。
+#
+# 以前は4つとも一律 2000 件だったが、実際の使われ方は大きく偏っている
+# (本番の nginx ログ4日ぶん、上流に届いた本数):
+#
+#   /detail   51,170本 (ユニーク 48,771)   ← シティリーグ結果ページが1ページに16件引く
+#   /list        438本 (ユニーク    128)
+#   /summary       0本
+#   /acespec       0本  (webapp 側が1日のブラウザキャッシュを付けているため届かない)
+#
+# 総量は増やせない。ワーカーは gunicorn -w 2 で、稼働22日の実測は1本あたり約200MB、
+# コンテナ全体で 398MiB / 上限 512m(78%)まで来ている。そこで一律に増やすのではなく、
+# 使われていないぶんを削って /detail へ回す。1件は実測 6KB 前後なので、
+# 差し引きではむしろ数MB減る。
+#
+# 上限を触るときは docker-compose.yml の mem_limit と実測(docker stats)を必ず併せて見ること。
+acespec_cache = ThreadSafeCache(cachetools.LRUCache(maxsize=1000))
 
-deck_list_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=2000))
-deck_summary_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=2000))
-deck_detail_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=2000))
+deck_list_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=300))
+deck_summary_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=200))
+deck_detail_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=4000))
 
 # pokemon_cardsマスタ（card_id -> (ability, attacks)）のキャッシュ。
 # ほぼ不変のマスタデータだが、更新反映のため24時間のTTLを設ける。
