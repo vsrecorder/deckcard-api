@@ -27,6 +27,24 @@ services:
     memswap_limit: 512m
     mem_reservation: 192m
     network_mode: "host"
+    #
+    # 応答できる状態になったかの判定。
+    #
+    # これが無いと `docker compose up --wait` は「コンテナが起動した」だけで完了し、
+    # gunicorn がワーカーを立ち上げる前にデプロイが終わったことになる。
+    #
+    # curl は入っていないので python で叩く(/health は空のJSONを返すだけの経路)。
+    #
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=3).status == 200 else 1)"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     ports:
       - "8080:8080"
     environment:
