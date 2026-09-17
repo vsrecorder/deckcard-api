@@ -1,5 +1,7 @@
 """定数とURL組み立てヘルパー"""
 
+import re
+
 # デッキ結果ページの取得元URL（キャッシュ配信）
 BASE_URL = "https://xx8nnpgt.user.webaccel.jp/deck-result_html/"
 
@@ -36,3 +38,16 @@ ACESPEC_SUFFIX = "(ACE SPEC)"
 def strip_acespec(card_name):
     """カード名から "(ACE SPEC)" の目印を取り除く"""
     return str(card_name).replace(ACESPEC_SUFFIX, "")
+
+
+# デッキコードとして受け付ける書式。公式のデッキコードは英数字とハイフンのみ。
+# core-apiserver の entity.deckCodePattern (^[0-9A-Za-z-]+$) と揃える。
+#
+# 検証せずに URL へ連結すると、".." のような値で requests がパスを正規化し、
+# 同一ホスト(配信元CDN・公式サイト)の別パスを取りに行かせられる。書式外は取得前に弾く。
+DECK_CODE_PATTERN = re.compile(r"[0-9A-Za-z-]+")
+
+
+def is_valid_deck_code(deck_code):
+    """デッキコードが受け付けられる書式（英数字とハイフンのみ）か判定する。"""
+    return isinstance(deck_code, str) and DECK_CODE_PATTERN.fullmatch(deck_code) is not None

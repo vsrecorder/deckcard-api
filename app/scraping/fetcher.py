@@ -10,7 +10,7 @@ from fastapi.responses import JSONResponse
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-from app.core.constants import BASE_URL, FALLBACK_URL
+from app.core.constants import BASE_URL, FALLBACK_URL, is_valid_deck_code
 from app.scraping.parser import is_deck_not_found
 
 logger = logging.getLogger(__name__)
@@ -69,6 +69,13 @@ def fetch_deck_html(deck_code):
         JSONResponse: 取得失敗時のエラーレスポンス。呼び出し側は
             ``isinstance(res, JSONResponse)`` で失敗を判定する。
     """
+    # 書式外のデッキコードは URL へ連結する前に弾く。
+    # 検証せず連結すると ".." のような値で同一ホストの別パスを取りに行かせられ、
+    # 書式外のコードで無駄な外部取得を2回走らせることにもなる(400で早期に返す)。
+    if not is_valid_deck_code(deck_code):
+        logger.info(f"Invalid deck code format: {deck_code!r}")
+        return JSONResponse(content={}, status_code=400)
+
     try:
         logger.info(f"Request start: {BASE_URL + deck_code}")
 
