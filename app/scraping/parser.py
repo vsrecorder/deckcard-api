@@ -36,6 +36,25 @@ def _unescape(value):
     return html.unescape(value)
 
 
+# デッキコードが存在しないときに公式サイトが返すエラーページの目印。
+#
+# 存在しないデッキコードでも、キャッシュ配信元(WebAccel)が404を返したあとに
+# フォールバックした公式サイトは HTTP 200 で「デッキコードエラー」ページを返す。
+# このページも <script> が2つ・inputArea が1つあるため解析自体は通ってしまい、
+# カードが0枚のまま「60枚でない」として 500 になっていた(存在しないコードは
+# クライアントの誤りなので、本来は 404 が正しい)。
+# 表示文言は該当メッセージが本文中に2度現れる。両方の目印が揃ったときだけ not found と判定する。
+_DECK_NOT_FOUND_MARKERS = ("デッキコードエラー", "は見つかりません")
+
+
+def is_deck_not_found(html_text):
+    """デッキコードが存在しないエラーページか判定する。
+
+    正規のデッキ結果ページには現れない目印が揃ったときだけ True を返す。
+    """
+    return all(marker in html_text for marker in _DECK_NOT_FOUND_MARKERS)
+
+
 def parse_card_dicts(bs):
     """カード名辞書と画像辞書を抽出する。
 

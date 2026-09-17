@@ -11,6 +11,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 from app.core.constants import BASE_URL, FALLBACK_URL
+from app.scraping.parser import is_deck_not_found
 
 logger = logging.getLogger(__name__)
 
@@ -135,5 +136,12 @@ def fetch_deck_html(deck_code):
     except requests.exceptions.RequestException as e:
         logger.exception(f"Unexpected RequestException: {BASE_URL + deck_code} -> {e}")
         return JSONResponse(content={}, status_code=500)
+
+    # 存在しないデッキコードは公式サイトが HTTP 200 のエラーページを返すため、
+    # ステータスだけでは失敗と分からない。本文の目印で判定して 404 に変換する
+    # (以前は解析まで進んで「60枚でない」として 500 になっていた)。
+    if is_deck_not_found(res.text):
+        logger.info(f"Deck code not found: {deck_code}")
+        return JSONResponse(content={}, status_code=404)
 
     return res
