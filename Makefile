@@ -12,6 +12,10 @@ run: install
 	-b 0.0.0.0:8080 \
 	--timeout 60
 
+.PHONY: test
+test: install
+	poetry run pytest
+
 .PHONY: image-local
 image-local:
 	docker build . -t vsrecorder/deckcard-api:local

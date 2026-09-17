@@ -26,3 +26,14 @@ package-mode = false
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.1.1,<10.0.0)"
+]
+
+[tool.pytest.ini_options]
+# package-mode = false のためプロジェクトが site-packages に入らない。
+# poetry run pytest からでも app パッケージを解決できるようルートを通す。
+pythonpath = ["."]
+testpaths = ["tests"]
