@@ -36,6 +36,11 @@ class ThreadSafeCache:
         with self._lock:
             return len(self._cache)
 
+    @property
+    def ttl(self):
+        """有効期限（秒）。TTLを持たないキャッシュなら ``None``。"""
+        return getattr(self._cache, "ttl", None)
+
 
 # エンドポイントごとのレスポンスキャッシュ。
 #
@@ -53,19 +58,47 @@ class ThreadSafeCache:
 # 差し引きではむしろ数MB減る。
 #
 # 上限を触るときは docker-compose.yml の mem_limit と実測(docker stats)を必ず併せて見ること。
-acespec_cache = ThreadSafeCache(cachetools.LRUCache(maxsize=1000))
+#
+# maxsize は据え置いたままTTLを足した(2026-09-23)。TTLCacheは1件あたり有効期限の
+# リンクを余分に持つが、1件6KBのレスポンスに対して数十バイトなので総量は変わらない。
+# 期限切れは参照時に遅延削除されるため、引かれないキーはmaxsizeに達するまで残る。
+# キャッシュの有効期限（秒）。マスタの更新を取り込むためのもの。
+#
+# レスポンスキャッシュには必ずこれを付ける。デッキのレスポンスは
+# 「公式ページから読んだカード構成」と「DBから引いた特性・ワザ・ACE SPEC」を
+# 合成した結果を丸ごと保持しており、TTLが無いとマスタを更新しても古い合成結果を
+# 返し続けるため。
+#
+# 実際に起きた事故(2026-09-23): deck_detail_cache だけTTLが無く、
+# pokemon_cards の特性・ワザの抽出を直したあとも、既にキャッシュに乗っていた
+# デッキは古い ability='' を返し続けた。同じカードなのに、引くデッキによって
+# 返る値が違う状態になり、シティリーグ結果の取り込みバッチが古い card_key を
+# 索引して vslab のカード辞書から漏れた。
+#
+# 内側の pokemon_card_cache にTTLがあっても効かない。外側のレスポンスキャッシュに
+# ヒットした時点で、内側は参照されないため。
+CACHE_TTL_SECONDS = 60 * 60 * 24
 
-deck_list_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=300))
-deck_summary_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=200))
-deck_detail_cache = ThreadSafeCache(cachetools.LFUCache(maxsize=4000))
+acespec_cache = ThreadSafeCache(
+    cachetools.TTLCache(maxsize=1000, ttl=CACHE_TTL_SECONDS)
+)
+
+deck_list_cache = ThreadSafeCache(
+    cachetools.TTLCache(maxsize=300, ttl=CACHE_TTL_SECONDS)
+)
+deck_summary_cache = ThreadSafeCache(
+    cachetools.TTLCache(maxsize=200, ttl=CACHE_TTL_SECONDS)
+)
+deck_detail_cache = ThreadSafeCache(
+    cachetools.TTLCache(maxsize=4000, ttl=CACHE_TTL_SECONDS)
+)
 
 # pokemon_cardsマスタ（card_id -> (ability, attacks)）のキャッシュ。
-# ほぼ不変のマスタデータだが、更新反映のため24時間のTTLを設ける。
-# 無期限にしたい場合は cachetools.LRUCache(maxsize=20000) に差し替える。
 pokemon_card_cache = ThreadSafeCache(
-    cachetools.TTLCache(maxsize=20000, ttl=60 * 60 * 24)
+    cachetools.TTLCache(maxsize=20000, ttl=CACHE_TTL_SECONDS)
 )
 
 # ACE SPECカードのIDの集合のキャッシュ。集合ひとつを丸ごと保持するのでmaxsizeは1。
-# 新しいACE SPECの追加を取り込むため、こちらも24時間のTTLを設ける。
-acespec_ids_cache = ThreadSafeCache(cachetools.TTLCache(maxsize=1, ttl=60 * 60 * 24))
+acespec_ids_cache = ThreadSafeCache(
+    cachetools.TTLCache(maxsize=1, ttl=CACHE_TTL_SECONDS)
+)
