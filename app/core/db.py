@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from psycopg_pool import ConnectionPool
 
 from app.core.cache import acespec_ids_cache, pokemon_card_cache
-from app.core.constants import ACESPEC_SUFFIX
+from app.core.constants import ACESPEC_SUFFIX, split_attacks
 from app.core.errors import DeckError
 
 logger = logging.getLogger(__name__)
@@ -40,7 +40,7 @@ def fetch_pokemon_cards(card_ids):
         card_ids: カードIDのイテラブル（str/intが混在していても可）。
     Returns:
         {card_id(int): (ability, attacks)} の辞書。
-        abilityは特性文字列、attacksはワザ名のリスト。
+        abilityは特性文字列、attacksはワザ名のリスト（ワザを持たないカードは空リスト）。
     Raises:
         DeckError: いずれかのIDのレコードが見つからない場合（500）。
     """
@@ -68,7 +68,7 @@ def fetch_pokemon_cards(card_ids):
                 rows = cur.fetchall()
 
         for row in rows:
-            value = (row[1], row[2].split("/"))
+            value = (row[1], split_attacks(row[2]))
             result[row[0]] = value
             # 取得できたカードはキャッシュに格納する
             pokemon_card_cache[row[0]] = value

@@ -51,3 +51,20 @@ DECK_CODE_PATTERN = re.compile(r"[0-9A-Za-z-]+")
 def is_valid_deck_code(deck_code):
     """デッキコードが受け付けられる書式（英数字とハイフンのみ）か判定する。"""
     return isinstance(deck_code, str) and DECK_CODE_PATTERN.fullmatch(deck_code) is not None
+
+
+def split_attacks(attack):
+    """``pokemon_cards.attack``（"/" 区切り）をワザ名のリストにする。
+
+    ワザを持たないポケモン（特性だけのカード）は空リストにする。
+    ``"".split("/")`` は ``[""]`` を返すため、そのまま返すと「名前の無いワザが
+    1 つある」ことになり、レスポンスの利用側と食い違う。
+
+    実際に起きたこと(2026-09-23): メタモン(card_id=42378, ability='いきなりへんげ'、
+    ワザ無し)で ``attacks: [""]`` を返していた。取り込みバッチ側のカードマスタは
+    空リストにしているため、同じカードなのに毎回「値が違う」と判定され、
+    114 デッキぶんの書き戻しが繰り返し発生していた。
+    """
+    if not attack or not attack.strip():
+        return []
+    return attack.split("/")
