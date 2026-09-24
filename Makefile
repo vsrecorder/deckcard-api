@@ -2,6 +2,8 @@ SHELL := /bin/bash
 
 .PHONY: install
 install:
+	git pull --ff-only
+	git fetch --prune
 	poetry install
 
 .PHONY: run
@@ -18,16 +20,20 @@ test: install
 
 .PHONY: image-local
 image-local:
+	git pull --ff-only
+	git fetch --prune
 	docker build . -t vsrecorder/deckcard-api:local
 
 .PHONY: image-prod
 image-prod:
+	git pull --ff-only
+	git fetch --prune
 	docker build . -t vsrecorder/deckcard-api:latest
 	docker push       vsrecorder/deckcard-api:latest
 
 .PHONY: deploy
 deploy:
-	git pull
+	git pull --ff-only
 	git fetch --prune
 	docker compose pull
 	docker compose up -d --no-deps --wait deckcard-api
