@@ -2,7 +2,7 @@
 # 3.11 系はセキュリティ修正だけが出る期間に入っているため、パッチ版はすべてセキュリティリリース。
 # 3.11.14 のまま据え置くと、その後の修正(3.11.15〜)が入らない。
 #
-FROM python:3.11.18-slim
+FROM python:3.15.0-slim
 
 RUN apt-get update && apt-get install -y \
     curl \
