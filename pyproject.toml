@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "beautifulsoup4 (==4.12.2)",
-    "fastapi (>=0.137.0,<0.138.0)",
+    "fastapi (>=0.137.2,<0.138.0)",
     "uvicorn (==0.38.0)",
     "requests (==2.33.0)",
     "python-dotenv (==1.2.2)",
@@ -17,7 +17,7 @@ dependencies = [
     "psycopg-binary (==3.3.2)",
     "psycopg-pool (==3.3.0)",
     "cachetools (==7.0.3)",
-    "gunicorn (>=26.0.0,<27.0.0)"
+    "gunicorn (>=26.2.0,<27.0.0)"
 ]
 
 [tool.poetry]
