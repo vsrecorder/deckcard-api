@@ -38,3 +38,10 @@ updates:
     open-pull-requests-limit: 5
     cooldown:
       default-days: 7
+    # python のイメージはパッチ版(3.11.x)だけを提案させる。
+    # Docker のタグでは 3.11 → 3.15 もマイナー更新として扱われ、2026-11-02 に 3.15.0 への PR(#7)を
+    # 取り込んだところ、psycopg-binary / pydantic-core に cp315 の wheel が無く、イメージのビルドが
+    # 通らなくなった。Python のバージョンを上げるときは、依存の対応状況を確かめてから手で上げる。
+    ignore:
+      - dependency-name: "python"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
