@@ -6,7 +6,7 @@ authors = [
     {name = "sosomasox",email = "sosomasox@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.11.5"
 dependencies = [
     "beautifulsoup4 (==4.12.2)",
     "fastapi (>=0.137.2,<0.138.0)",
@@ -17,7 +17,11 @@ dependencies = [
     "psycopg-binary (==3.3.2)",
     "psycopg-pool (==3.3.0)",
     "cachetools (==7.0.3)",
-    "gunicorn (>=26.2.0,<27.0.0)"
+    "gunicorn (>=26.2.0,<27.0.0)",
+    # beautifulsoup4 の間接依存。2.10 以下に ReDoS などの脆弱性があり(Dependabot alerts #16〜#18)、
+    # 4.0.0 で修正されたため、古い版に戻らないよう直接の依存として版を固定する。
+    # soupsieve 4 系は Python 3.11.5 以上が必要なので、requires-python も合わせて上げている。
+    "soupsieve (==4.0.1)"
 ]
 
 [tool.poetry]
