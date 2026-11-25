@@ -15,17 +15,25 @@ services:
     # network_mode: host と cgroup のメモリ制限は独立しているため、
     # ホストネットワークのままでもこの制限は効く。
     #
-    # 512m の根拠: 2026-08-16 の本番実測(docker stats)でコンテナ全体 180MiB
-    # (gunicorn master + uvicorn worker×2)。約2.8倍を取っている。
+    # 768m の根拠: 2026-11-25 の本番実測(docker stats)でコンテナ全体 457MiB
+    # (uvicorn worker が 235MB と 228MB、gunicorn master が 20MB)。約1.7倍を取っている。
+    # ワーカーのメモリは漏れではなく、レスポンスキャッシュ(app/core/cache.py)が満杯になった
+    # ときの量で、そこで頭打ちになる(作業機で 14,000 件流して確認。7,000 件以降は横ばい)。
+    # 以前の 512m は、キャッシュがほとんど空だった 2026-08-16 の 180MiB を基準にしていたため、
+    # 満杯になると 89% まで来て、同時に走る HTML の解析のぶんの余裕が無かった。
     #
-    # gunicorn の -w を 2 から増やすとワーカー1本ぶん(実測では約90MB)が
-    # そのまま上乗せされるため、その際はこの値も併せて見直すこと。
+    # 空きを作る目的でワーカーを定期的に入れ替える(gunicorn の --max-requests)のは採らない。
+    # 作業機で試すと、入れ替えのたびに処理中の接続が切れて、6,000 件中 122 件が失敗した。
     #
-    # mem_reservation は実測値に合わせている。
+    # キャッシュの maxsize か gunicorn の -w を増やすと、そのぶんがそのまま上乗せされる
+    # (キャッシュは /detail 1件あたり約 27KB、ワーカーは1本あたり 230MB 前後)。
+    # その際はこの値も併せて見直すこと。
     #
-    mem_limit: 512m
-    memswap_limit: 512m
-    mem_reservation: 192m
+    # mem_reservation は満杯時の実測に合わせている。
+    #
+    mem_limit: 768m
+    memswap_limit: 768m
+    mem_reservation: 480m
     network_mode: "host"
     #
     # 応答できる状態になったかの判定。
