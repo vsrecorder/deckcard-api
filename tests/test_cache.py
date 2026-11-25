@@ -17,6 +17,7 @@ from app.core.cache import (
     acespec_ids_cache,
     deck_detail_cache,
     deck_list_cache,
+    deck_page_cache,
     deck_summary_cache,
     pokemon_card_cache,
 )
@@ -38,8 +39,28 @@ def test_all_caches_have_ttl(name, cache):
 
     どれか一つでもTTLを落とすと、そのエンドポイントだけマスタ更新が
     反映されなくなる。追加したキャッシュもここに足すこと。
+    （例外は deck_page_cache だけ。マスタ由来の値を持たないため。下のテストを参照）
     """
     assert cache.ttl == CACHE_TTL_SECONDS, f"{name} にTTLが無い（または値が違う）"
+
+
+def test_deck_page_cache_has_no_ttl_and_evicts_least_recently_used():
+    """ページの内容のキャッシュだけは TTL を持たず、溢れたぶんを使われていない順に捨てる。
+
+    持つのはデッキコードが同じなら変わらないページ由来の値だけ（app/scraping/page.py）。
+    カードマスタ由来の値を入れるなら、ここではなく TTL 付きのキャッシュに入れること。
+    """
+    assert deck_page_cache.ttl is None
+
+    cache = ThreadSafeCache(cachetools.LRUCache(maxsize=2))
+    cache["a"] = b"1"
+    cache["b"] = b"2"
+    assert cache.get("a") == b"1"  # a を使う → 次に捨てられるのは b
+    cache["c"] = b"3"
+
+    assert cache.get("b") is None
+    assert cache.get("a") == b"1"
+    assert cache.get("c") == b"3"
 
 
 def test_entry_expires_after_ttl():

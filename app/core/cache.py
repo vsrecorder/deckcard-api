@@ -94,9 +94,34 @@ deck_list_cache = ThreadSafeCache(
 deck_summary_cache = ThreadSafeCache(
     cachetools.TTLCache(maxsize=200, ttl=CACHE_TTL_SECONDS)
 )
+# /detail は 4,000 件から 500 件に減らした(2026-11-25)。
+#
+# ページの取得とHTMLの解析は deck_page_cache（下）が受け持つようになり、ここに無くても
+# レスポンスは「ページの内容 + マスタ」から組み立て直すだけで済む（1,000 件 × 5 エンドポイントで
+# 計 3 秒。取得と解析をしていたときは 67 秒）。一方で1件はメモリ上で約 27KB あり、4,000 件を
+# 2ワーカーで持つと 200MB を超える。直近に引かれたものだけ持てば足りる。
 deck_detail_cache = ThreadSafeCache(
-    cachetools.TTLCache(maxsize=4000, ttl=CACHE_TTL_SECONDS)
+    cachetools.TTLCache(maxsize=500, ttl=CACHE_TTL_SECONDS)
 )
+
+# デッキ結果ページから読み取った内容（デッキコード -> バイト列）のキャッシュ。
+# 中身は app/scraping/page.py の DeckPage。
+#
+# これだけは TTL を付けない。持つのはページ由来の値（カード名・画像のパス・区分ごとの
+# カードIDと枚数）だけで、デッキコードが同じなら変わらないため。上の「TTLを必ず付ける」は
+# カードマスタ由来の値を含むキャッシュの話で、ここにはマスタ由来の値を入れてはならない
+# （入れると、マスタを更新しても古い値を返し続ける 2026-09-23 の事故が再発する）。
+#
+# 期限が無いので、溢れたぶんは使われていない順に捨てる（LRU）。
+#
+# maxsize は、シティリーグ1シーズンぶんのデッキ（2026-11 の実測で約 8,800 件）が
+# 余裕をもって収まる大きさにしている。取り込みバッチ（import-cityleague-result-opensearch）は
+# 毎日1回、開催中〜終了直後の開催回の全デッキを取り直しに来る。ここに収まっていれば、
+# そのときページの取得とHTMLの解析が走らない。
+#
+# 配信元のHTMLを手で差し替えた（import-cityleague-result-bat の cmd/add・cmd/del）ときは、
+# ここに古い内容が残る。コンテナを再起動して消すこと（メモリ上にしか持っていない）。
+deck_page_cache = ThreadSafeCache(cachetools.LRUCache(maxsize=20000))
 
 # pokemon_cardsマスタ（card_id -> (ability, attacks)）のキャッシュ。
 pokemon_card_cache = ThreadSafeCache(

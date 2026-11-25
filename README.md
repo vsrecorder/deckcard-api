@@ -14,6 +14,9 @@
 2. 取得した HTML を解析し、カード名・カード画像・カード枚数を抽出する（`app/scraping/parser.py`）
    - ページ内の `<script>` から `searchItemNameAlt` / `searchItemCardPict` を正規表現で取り出す
    - `inputArea` 内の `<input>` の value からカードIDと枚数を復元する
+   - 読み取った内容は、デッキコードごとに**期限なし**でメモリに持つ（`app/scraping/page.py`）。
+     デッキコードが同じならページの内容は変わらないので、取得と解析はデッキコードごとに 1 回で済む
+     （60 枚そろって読めたページだけを持つ。溢れたぶんは使われていない順に捨てる）
 3. ポケモンカードについては、DB（PostgreSQL の `pokemon_cards` テーブル）から**特性・ワザ**を補完する（`app/core/db.py`）
    - `WHERE id = ANY(...)` で一括取得し、N+1 クエリを回避
    - マスタデータはアプリ内キャッシュ（24時間 TTL）で再利用
@@ -22,6 +25,10 @@
    - 結果はエンドポイント単位でメモリキャッシュ（**24時間 TTL**）する
    - レスポンスは「公式ページのカード構成」と「DB のカード情報」を合成した結果を
      丸ごと持つため、TTL が無いとマスタを更新しても古い値を返し続ける（`app/core/cache.py`）
+   - 期限が切れても、ページの内容（上の 2）が残っていれば、DB のカード情報を貼り直すだけで済む
+
+配信元（WebAccel）の HTML を手で差し替えたとき（`import-cityleague-result-bat` の `cmd/add`・`cmd/del`）は、
+ページの内容がメモリに残るので、コンテナを再起動して消すこと。
 
 ## API エンドポイント
 
@@ -51,7 +58,7 @@
 - **HTML 解析**: BeautifulSoup4
 - **HTTP クライアント**: requests（リトライ・タイムアウト設定あり）
 - **データベース**: PostgreSQL（psycopg 3 + コネクションプール）
-- **キャッシュ**: cachetools（TTL。レスポンス・マスタとも 24 時間）
+- **キャッシュ**: cachetools（レスポンス・マスタは TTL 24 時間。ページの内容は期限なしの LRU）
 - **サーバ**: gunicorn + uvicorn worker
 - **依存管理**: Poetry
 
@@ -65,11 +72,12 @@ deckcard-api/
 │   ├── services.py          各エンドポイントのレスポンス整形（サービス層）
 │   ├── scraping/
 │   │   ├── fetcher.py       デッキ結果ページの HTTP 取得
+│   │   ├── page.py          ページから読み取った内容（デッキの構成）とそのキャッシュ
 │   │   └── parser.py        HTML パース
 │   └── core/
 │       ├── constants.py     URL 定義・ACE SPEC 一覧・URL 組み立て
 │       ├── db.py            PostgreSQL 接続とカード情報照会
-│       ├── cache.py         レスポンスキャッシュ定義
+│       ├── cache.py         キャッシュ定義（レスポンス・マスタ・ページの内容）
 │       └── errors.py        共通例外（DeckError）
 ├── Dockerfile
 ├── docker-compose.yml

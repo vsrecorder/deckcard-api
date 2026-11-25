@@ -1,13 +1,12 @@
 """デッキカード情報を生成するサービス層
 
-各エンドポイントに対応するレスポンス整形を担う。HTTP取得・HTMLパース・DB照会は
-それぞれ fetcher / parser / db モジュールへ委譲する。
+各エンドポイントに対応するレスポンス整形を担う。ページの取得と読み取り・DB照会は
+それぞれ scraping.page / db モジュールへ委譲する。
 """
 
 import logging
 
 import psycopg
-from bs4 import BeautifulSoup
 from fastapi.responses import JSONResponse, Response
 
 from app.core.cache import (
@@ -19,30 +18,25 @@ from app.core.cache import (
 from app.core.constants import card_detail_url, card_image_url, strip_acespec
 from app.core.db import fetch_acespec_ids, fetch_pokemon_cards
 from app.core.errors import DeckError
-from app.scraping.fetcher import fetch_deck_html
-from app.scraping.parser import get_input_area, parse_card_counts, parse_card_dicts
+from app.scraping.page import SKIP_INPUT_IDS, load_deck_page
+from app.scraping.parser import parse_card_counts
 
 logger = logging.getLogger(__name__)
 
-# input要素のうち、カードとして扱わないid
-_SKIP_INPUT_IDS = {"deck_ajs", "copyDeckID"}
-
-
 def create_v1beta_deckcards(deck_code):
-    res = fetch_deck_html(deck_code)
-    if isinstance(res, JSONResponse):
-        return res
+    page = load_deck_page(deck_code)
+    if isinstance(page, JSONResponse):
+        return page
 
     try:
-        bs = BeautifulSoup(res.text, "html.parser")
-        card_name_dict, card_image_dict = parse_card_dicts(bs)
-        bs_input_area = get_input_area(bs)
+        card_name_dict, card_image_dict = page.card_dicts()
+        input_items = page.input_items()
 
         ret_list = []
         total_card_count = 0
 
-        for item in bs_input_area.find_all("input"):
-            if item["id"] in _SKIP_INPUT_IDS:
+        for item in input_items:
+            if item["id"] in SKIP_INPUT_IDS:
                 continue
 
             deckcards = []
@@ -94,20 +88,19 @@ def create_v1beta_deckcards(deck_code):
 
 
 def create_v1beta_deckcards_detail(deck_code):
-    res = fetch_deck_html(deck_code)
-    if isinstance(res, JSONResponse):
-        return res
+    page = load_deck_page(deck_code)
+    if isinstance(page, JSONResponse):
+        return page
 
     try:
-        bs = BeautifulSoup(res.text, "html.parser")
-        card_name_dict, card_image_dict = parse_card_dicts(bs)
-        bs_input_area = get_input_area(bs)
+        card_name_dict, card_image_dict = page.card_dicts()
+        input_items = page.input_items()
 
         ret_dict = {}
         total_card_count = 0
 
-        for item in bs_input_area.find_all("input"):
-            if item["id"] in _SKIP_INPUT_IDS:
+        for item in input_items:
+            if item["id"] in SKIP_INPUT_IDS:
                 continue
 
             deckcards = []
@@ -179,20 +172,19 @@ def create_v1beta_deckcards_detail(deck_code):
 
 
 def create_v1beta_deckcards_list(deck_code):
-    res = fetch_deck_html(deck_code)
-    if isinstance(res, JSONResponse):
-        return res
+    page = load_deck_page(deck_code)
+    if isinstance(page, JSONResponse):
+        return page
 
     try:
-        bs = BeautifulSoup(res.text, "html.parser")
-        card_name_dict, card_image_dict = parse_card_dicts(bs)
-        bs_input_area = get_input_area(bs)
+        card_name_dict, card_image_dict = page.card_dicts()
+        input_items = page.input_items()
 
         ret_list = []
         total_card_count = 0
 
-        for item in bs_input_area.find_all("input"):
-            if item["id"] in _SKIP_INPUT_IDS:
+        for item in input_items:
+            if item["id"] in SKIP_INPUT_IDS:
                 continue
 
             deckcards = []
@@ -277,20 +269,19 @@ def create_v1beta_deckcards_list(deck_code):
 
 
 def create_v1beta_deckcards_summary(deck_code):
-    res = fetch_deck_html(deck_code)
-    if isinstance(res, JSONResponse):
-        return res
+    page = load_deck_page(deck_code)
+    if isinstance(page, JSONResponse):
+        return page
 
     try:
-        bs = BeautifulSoup(res.text, "html.parser")
-        card_name_dict, card_image_dict = parse_card_dicts(bs)
-        bs_input_area = get_input_area(bs)
+        card_name_dict, card_image_dict = page.card_dicts()
+        input_items = page.input_items()
 
         ret_dict = {}
         total_card_count = 0
 
-        for item in bs_input_area.find_all("input"):
-            if item["id"] in _SKIP_INPUT_IDS:
+        for item in input_items:
+            if item["id"] in SKIP_INPUT_IDS:
                 continue
 
             deckcards = []
@@ -377,12 +368,11 @@ def _extract_acespec(deck_code, id_key, name_key):
         None: デッキにACE SPECが入っていない場合。
         JSONResponse: ページの取得に失敗した場合。
     """
-    res = fetch_deck_html(deck_code)
-    if isinstance(res, JSONResponse):
-        return res
+    page = load_deck_page(deck_code)
+    if isinstance(page, JSONResponse):
+        return page
 
-    bs = BeautifulSoup(res.text, "html.parser")
-    card_name_dict, card_image_dict = parse_card_dicts(bs)
+    card_name_dict, card_image_dict = page.card_dicts()
 
     acespec_ids = fetch_acespec_ids()
 
